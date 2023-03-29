@@ -10,7 +10,7 @@ class RegisterCadetForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['last_name', 'first_name', 'sur_name', 'username', 'password1', 'password2', 'role']
+        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']
 
 
 class RegisterInstructorForm(UserCreationForm):
@@ -18,7 +18,7 @@ class RegisterInstructorForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['last_name', 'first_name', 'sur_name', 'username', 'password1', 'password2', 'role']
+        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']
 
 
 class RegisterOperForm(UserCreationForm):
@@ -26,4 +26,4 @@ class RegisterOperForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['last_name', 'first_name', 'sur_name', 'username', 'password1', 'password2', 'role']
+        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']

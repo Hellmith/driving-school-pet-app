@@ -1,0 +1,31 @@
+{% extends './base.html' %} {% load static %} {% block title %} Добро
+пожаловать! {% endblock title %} {% block content %}
+<main
+  style="width: 100vw; height: 100vh; background-color: black; color: white"
+>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      height: 100%;
+      width: 100%;
+    "
+  >
+    <a href={% url 'login' %} style='color: royalblue; text-decoration: none;'>Войти</a>
+    <nav style='display: flex; gap: 1.5rem;'>
+        <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
+            Продолжить как кадет
+        </a>
+         <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
+            Продолжить как инструктор
+        </a>
+         <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
+            Продолжить как сотрудник
+        </a>
+    </nav>
+  </div>
+</main>
+{% endblock content %}

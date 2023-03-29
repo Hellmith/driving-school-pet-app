@@ -78,7 +78,7 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = [
         'username',
         'email',
-        'post',
+        'id_post',
         'last_name',
         'first_name',
         'patronymic',

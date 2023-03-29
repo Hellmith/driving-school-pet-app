@@ -8,7 +8,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = 'категория'
-        verbose_name = 'категории'
+        verbose_name_plural = 'категории'
 
     def __str__(self):
         return self.name_category
@@ -23,10 +23,10 @@ class Course(models.Model):
 
     class Meta:
         verbose_name = 'курс'
-        verbose_name = 'курсы'
+        verbose_name_plural = 'курсы'
 
     def __str__(self):
-        return self.id
+        return '%s' % (self.id_category)
 
 
 # ДИСЦИПЛИНА
@@ -37,10 +37,10 @@ class Discipline(models.Model):
 
     class Meta:
         verbose_name = 'дисциплина'
-        verbose_name = 'дисциплины'
+        verbose_name_plural = 'дисциплины'
 
     def __str__(self):
-        return self.id
+        return self.name_discipline
 
 
 # РЕГИОН
@@ -49,7 +49,7 @@ class Region(models.Model):
 
     class Meta:
         verbose_name = 'регион'
-        verbose_name = 'регионы'
+        verbose_name_plural = 'регионы'
 
     def __str__(self):
         return self.name
@@ -62,7 +62,7 @@ class City(models.Model):
 
     class Meta:
         verbose_name = 'город'
-        verbose_name = 'города'
+        verbose_name_plural = 'города'
 
     def __str__(self):
         return self.name
@@ -74,7 +74,7 @@ class Street(models.Model):
 
     class Meta:
         verbose_name = 'улица'
-        verbose_name = 'улицы'
+        verbose_name_plural = 'улицы'
 
     def __str__(self):
         return self.name
@@ -86,7 +86,7 @@ class Post(models.Model):
 
     class Meta:
         verbose_name = 'должность'
-        verbose_name = 'должности'
+        verbose_name_plural = 'должности'
 
     def __str__(self):
         return self.name
@@ -118,10 +118,13 @@ class User(AbstractUser):
 
     class Meta:
         verbose_name = 'пользователь'
-        verbose_name = 'пользователи'
+        verbose_name_plural = 'пользователи'
 
     def __str__(self):
-        return '%s %s %s' % (self.last_name, self.first_name, self.patronymic)
+        if self.last_name and self.first_name and self.patronymic:
+            return '%s %s %s' % (self.last_name, self.first_name, self.patronymic)
+        else:
+            return self.username
 
 
 # ОБУЧЕНИЕ
@@ -137,15 +140,22 @@ class Training(models.Model):
 
     class Meta:
         verbose_name = 'обучение'
-        verbose_name = 'обучения'
+        verbose_name_plural = 'обучения'
 
     def __str__(self):
-        return '%i %i' % (self.id_cursant, self.id_course)
+        return '%s %s' % (self.id_cursant, self.id_course)
 
 
 # РАСПИСАНИЕ
 class Schedule(models.Model):
-    id_worker = models.ForeignKey(User, limit_choices_to={'is_worker': 1, 'post': 2}, on_delete=models.CASCADE, verbose_name='Сотрудник', related_name='Worker')
+    id_worker = models.ForeignKey(User,
+                                  limit_choices_to={
+                                      'is_worker': 1,
+                                      'id_post': 2
+                                  },
+                                  on_delete=models.CASCADE,
+                                  verbose_name='Сотрудник',
+                                  related_name='Worker')
     id_cursant = models.ForeignKey(User, limit_choices_to={'is_cursant': 1}, on_delete=models.CASCADE, verbose_name='Курсант', related_name='Cursant')
     id_discipline = models.ForeignKey(Discipline, on_delete=models.CASCADE, verbose_name='Дисциплина')
     date_class = models.DateField(verbose_name='Дата занятия')
@@ -153,7 +163,7 @@ class Schedule(models.Model):
 
     class Meta:
         verbose_name = 'расписание'
-        verbose_name = 'расписания'
+        verbose_name_plural = 'расписания'
 
     def __str__(self):
         return self.id
@@ -168,10 +178,10 @@ class Car(models.Model):
 
     class Meta:
         verbose_name = 'автомобиль'
-        verbose_name = 'автомобили'
+        verbose_name_plural = 'автомобили'
 
     def __str__(self):
-        return '%s %s %s %d' % (self.gos_number, self.model, self.mark, self.date_release)
+        return '%s %s %s %s' % (self.gos_number, self.model, self.mark, self.date_release)
 
 
 # ВОЖДЕНИЕ
@@ -183,7 +193,7 @@ class Driving(models.Model):
 
     class Meta:
         verbose_name = 'вождение'
-        verbose_name = 'вождения'
+        verbose_name_plural = 'вождения'
 
     def __str__(self):
         return self.id

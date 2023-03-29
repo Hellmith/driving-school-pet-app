@@ -69,7 +69,7 @@ class UserAdmin(admin.ModelAdmin):
             'fields': ('is_superuser', 'is_cursant', 'is_worker', 'id_post')
         }),
         (None, {
-            'fields': ('status', 'last_login')
+            'fields': ['status']
         }),
     )
     list_display = ('username', 'email', 'last_name', 'first_name', 'patronymic', 'date_of_birthday', 'is_cursant', 'is_worker', 'is_superuser')

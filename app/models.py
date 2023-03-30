@@ -166,7 +166,7 @@ class Schedule(models.Model):
         verbose_name_plural = 'расписания'
 
     def __str__(self):
-        return self.id
+        return '%i' % (self.id)
 
 
 # АВТОМОБИЛИ

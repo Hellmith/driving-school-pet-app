@@ -1,18 +1,16 @@
 from django.urls import path
 from django.contrib.auth import views
 
-from .views import HomeView, AboutView, ProfileView, RegisterCadetView, RegisterInstructorView, RegisterOperView
+from .views import HomeView, ProfileView, ScheduleView
 
 urlpatterns = [
-    path('', HomeView.get, name='home'),
-    path('about/', AboutView.get, name='about'),
-    path('profile/', ProfileView.get, name='profile'),
+    path('', HomeView.showPage, name='home'),
+    path('profile/', ProfileView.showPage, name='profile'),
+    path('schedule/', ScheduleView.showPage, name='schedule'),
+    path('schedule/<id>', ScheduleView.actionPage, name='remove-schedule'),
     path(
         'login/',
         views.LoginView.as_view(redirect_authenticated_user=True),
         name='login',
-    ),
-    path('reg-cadet/', RegisterCadetView.get, name='reg-cadet'),
-    path('reg-intructor/', RegisterInstructorView.get, name='reg-instructor'),
-    path('reg-oper/', RegisterOperView.get, name='reg-oper'),
+    )
 ]

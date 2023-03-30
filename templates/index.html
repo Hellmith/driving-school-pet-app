@@ -16,7 +16,7 @@
   >
     <a href={% url 'login' %} style='color: royalblue; text-decoration: none;'>Войти</a>
     <nav style='display: flex; gap: 1.5rem;'>
-        <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
+        {% comment %} <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
             Продолжить как кадет
         </a>
          <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
@@ -24,7 +24,7 @@
         </a>
          <a href={% url 'reg-cadet' %} style='color: white; text-decoration: none;'>
             Продолжить как сотрудник
-        </a>
+        </a> {% endcomment %}
     </nav>
   </div>
 </main>

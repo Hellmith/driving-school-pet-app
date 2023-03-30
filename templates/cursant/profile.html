@@ -2,34 +2,17 @@
 {% endblock title %} {% block content %}
 
 <header class="text-gray-600 body-font border-b">
-  <div
-    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
-  >
-    <a
-      class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
-    >
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <span class="text-xl">Tailblocks</span>
     </a>
-    <nav
-      class="md:ml-auto flex flex-wrap items-center text-base justify-center"
-    >
-      <a class="mr-5 cursor-pointer hover:text-gray-900" href="{% url 'profile' %}">Карточка</a>
-      {% comment %} <a class="mr-5 cursor-pointer hover:text-gray-900" href="{% url 'cursant-schedule' %}">Расписание</a> {% endcomment %}
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 cursor-pointer hover:text-gray-900" href="{% url 'profile' %}"> Карточка </a>
+      <a class="mr-5 cursor-pointer hover:text-gray-900" href="{% url 'schedule' %}"> Расписание </a>
     </nav>
-    <a
-      class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-      href={% url 'logout' %}
-    >
+    <a class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0" href="{% url 'logout' %}">
       Выход
-      <svg
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="w-4 h-4 ml-1"
-        viewBox="0 0 24 24"
-      >
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
         <path d="M5 12h14M12 5l7 7-7 7"></path>
       </svg>
     </a>
@@ -47,59 +30,74 @@
             </svg>
           </div>
           <div class="flex flex-col items-center text-center justify-center">
-            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">
-              {{user.username}}
-            </h2>
+            <h2 class="font-medium title-font mt-4 text-gray-900 text-lg"> {{user.username}} </h2>
             <div class="w-44 h-1 bg-red-500 rounded mt-2 mb-4"></div>
-            <p class='text-base'>
-              Курсант
-            </p>
+            <p class="text-base">Курсант</p>
           </div>
         </div>
         <div class="sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-          <div class='flex gap-8 justify-between h-full'>
+          <div class="flex gap-8 justify-between h-full">
             <div>
-              <p class='font-medium title-font text-gray-900 mb-2'>Основные данные</p>
+              <p class="font-medium title-font text-gray-900 mb-2"> Основные данные </p>
               <div class="w-22 h-0.5 bg-red-500 rounded mt-2 mb-4"></div>
-              <ul class='text-base grid grid-cols-2 text-sm gap-x-4 gap-y-2'>
+              <ul class="text-base grid grid-cols-2 text-sm gap-x-4 gap-y-2">
                 <li>
-                  <span class='font-medium text-gray-900'>ФИО</span>:<br/> {{user.last_name}} {{user.first_name}} {{user.patronymic}}
+                  <span class="font-medium text-gray-900">ФИО</span>:<br />
+                  {% if user.last_name %}
+                    {{user.last_name}} {{user.first_name}} {{user.patronymic}}
+                  {% else %}
+                    Нет данных
+                  {% endif %}
                 </li>
                 <li>
-                  <span class='font-medium text-gray-900'>Дата рождения</span>:<br/> {{user.date_of_birthday}}
+                  <span class="font-medium text-gray-900">Дата рождения</span
+                  >:<br />
+                  {% if user.date_of_birthday %}
+                    {{user.date_of_birthday}}
+                  {% else %}
+                    Нет данных
+                  {% endif %}
                 </li>
+                <li><span class="font-medium text-gray-900">Почта</span>:<br /> {{user.email}} </li>
                 <li>
-                  <span class='font-medium text-gray-900'>Почта</span>:<br/> {{user.email}}
+                  <span class="font-medium text-gray-900">Телефон</span>:<br />
+                  {% if user.tel %}
+                    {{user.tel}}
+                  {% else %}
+                    Нет данных
+                  {% endif %}
                 </li>
-                <li>
-                  <span class='font-medium text-gray-900'>Телефон</span>:<br/> {{user.tel}}
-                </li>
-            </ul>
-          </div>
-          <div>
-             <p class='font-medium title-font text-gray-900 mb-2'>Курс</p>
+              </ul>
+            </div>
+            <div>
+              <p class="font-medium title-font text-gray-900 mb-2">Курс</p>
               <div class="w-22 h-0.5 bg-red-500 rounded mt-2 mb-4"></div>
-            <ul class='text-base grid grid-cols-3 text-sm gap-x-4 gap-y-2'>
-              <li>
-                <span class='font-medium text-gray-900'>Категория</span>:<br/> {{training.id_course}}
-              </li>
-              <li>
-                <span class='font-medium text-gray-900'>Договор №</span>:<br/> {{training.agreement_number}}
-              </li>
-              <li>
-                <span class='font-medium text-gray-900'>Свидетельство</span>:<br/> {{training.certificate}}
-              </li>
-              <li>
-                <span class='font-medium text-gray-900'>Дата зачисления</span>:<br/> {{training.date_record}}
-              </li>
-              <li>
-                <span class='font-medium text-gray-900'>Стоимость</span>:<br/> {{training.price}} р.
-              </li>
-               <li>
-                <span class='font-medium text-gray-900'>Статус оплаты</span>:<br/> {{training.payment_status}}
-              </li>
-            </ul>
-          </div>
+              <ul class="text-base grid grid-cols-3 text-sm gap-x-4 gap-y-2">
+                <li>
+                  <span class="font-medium text-gray-900">Категория</span>:<br /> {{training.id_course}}
+                </li>
+                <li>
+                  <span class="font-medium text-gray-900">Договор №</span>:<br /> {{training.agreement_number}}
+                </li>
+                <li>
+                  <span class="font-medium text-gray-900">Свидетельство</span>:<br /> {{training.certificate}}
+                </li>
+                <li>
+                  <span class="font-medium text-gray-900">Дата зачисления</span>:<br /> {{training.date_record}}
+                </li>
+                <li>
+                  <span class="font-medium text-gray-900">Стоимость</span>:<br /> {{training.price}} р.
+                </li>
+                <li>
+                  <span class="font-medium text-gray-900">Статус оплаты</span>:<br />
+                  {% if training.payment_status %}
+                    Оплачено
+                  {% else %}
+                    Не оплачено
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

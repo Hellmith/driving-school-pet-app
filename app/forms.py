@@ -2,28 +2,15 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms.widgets import HiddenInput
 
-from .models import User
+from .models import Schedule
 
 
-class RegisterCadetForm(UserCreationForm):
-    role = forms.CharField(widget=forms.HiddenInput(attrs={'readonly': True, 'value': 'cadet'}), required=False)
-
-    class Meta:
-        model = User
-        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']
-
-
-class RegisterInstructorForm(UserCreationForm):
-    role = forms.CharField(widget=forms.HiddenInput(attrs={'readonly': True, 'value': 'instructor'}), required=False)
+class CursantPostSchedule(forms.ModelForm):
+    id_worker = forms.TimeField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
+    id_discipline = forms.TimeField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
+    date_class = forms.DateField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
+    time_class = forms.TimeField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
 
     class Meta:
-        model = User
-        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']
-
-
-class RegisterOperForm(UserCreationForm):
-    role = forms.CharField(widget=forms.HiddenInput(attrs={'readonly': True, 'value': 'oper'}), required=False)
-
-    class Meta:
-        model = User
-        fields = ['last_name', 'first_name', 'patronymic', 'username', 'password1', 'password2', 'role']
+        model = Schedule
+        fields = fields = ["id_worker", "id_discipline", "date_class", "time_class"]

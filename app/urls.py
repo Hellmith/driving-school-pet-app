@@ -8,6 +8,7 @@ urlpatterns = [
     path('profile/', ProfileView.showPage, name='profile'),
     path('schedule/', ScheduleView.showPage, name='schedule'),
     path('schedule/<id>', ScheduleView.actionPage, name='remove-schedule'),
+    path('schedule/new/', ScheduleView.postPage, name='add-schedule'),
     path(
         'login/',
         views.LoginView.as_view(redirect_authenticated_user=True),

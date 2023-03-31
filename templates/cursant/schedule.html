@@ -75,9 +75,8 @@
     </section>
     <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
-        <form method="POST" action='' class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+        <form method="POST" action='/schedule/new/' class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
             {% csrf_token %}
-            {{ form.as_p }}
             <div class="relative flex-grow w-full">
                 <label for="id_worker" class="leading-7 text-sm text-gray-600">Инструктор</label>
                 <select type="text" id="id_worker" name="id_worker" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
@@ -100,8 +99,8 @@
                 <label for="id_time_class" class="leading-7 text-sm text-gray-600">Время</label>
                 <input type="time" id="id_time_class" required name="time_class" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
             </div>
-             <button class="text-white bg-red-500 border-0 text-sm font-medium py-2 px-4 focus:outline-none hover:bg-red-600 rounded">Добавить</button>
-        </div>
+             <button class="text-white bg-red-500 border-0 text-sm font-medium py-2 px-4 focus:outline-none hover:bg-red-600 rounded" type='submit'>Добавить</button>
+        </form>
     </div>
 </section>
 </main>

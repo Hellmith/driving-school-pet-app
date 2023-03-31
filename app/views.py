@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 
-from .models import Training, Schedule, User
+from .models import Training, Schedule, User, Discipline
 from .forms import CursantPostSchedule
 
 
@@ -41,21 +41,7 @@ class ScheduleView(View):
             user = request.user
             schedule = Schedule.objects.filter(id_cursant=user.id)
 
-            form = CursantPostSchedule(request.POST or None)
-            if form.is_valid():
-                print("\n\n form is valid")
-
-                schedule = form.save(commit=False)
-                schedule.id_worker = request.POST['id_worker']
-                schedule.id_discipline = request.POST['id_discipline']
-                schedule.id_cursant = request.user
-                schedule.date_class = request.POST['date_class']
-                schedule.time_class = request.POST['time_class']
-                schedule.save()
-
-                return redirect('schedule')
-
-            return render(request, 'cursant/schedule.html', {'schedule': schedule, 'form': form})
+            return render(request, 'cursant/schedule.html', {'schedule': schedule})
 
         elif request.user is not None and request.user.is_worker:
             user = request.user
@@ -68,5 +54,16 @@ class ScheduleView(View):
 
     def actionPage(request, id):
         remove = Schedule.objects.filter(id_cursant=request.user.id).filter(id=id).delete()
+
+        return redirect('schedule')
+
+    def postPage(request):
+        schedule_new = Schedule(id_worker = User.objects.get(id=request.POST['id_worker']),
+                                id_discipline = Discipline.objects.get(id=request.POST['id_discipline']),
+                                id_cursant=request.user,
+                                date_class=request.POST['date_class'],
+                                time_class=request.POST['time_class'])
+
+        schedule_new.save()
 
         return redirect('schedule')

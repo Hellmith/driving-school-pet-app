@@ -82,3 +82,9 @@ class ControlView(View):
     def showPage(request):
 
         return render(request, 'worker/control.html')
+
+
+class RedirectProfile(View):
+
+    def showPage(request):
+        return redirect('/profile/')

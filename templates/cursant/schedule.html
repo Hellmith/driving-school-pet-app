@@ -77,29 +77,10 @@
     <div class="container px-5 py-24 mx-auto">
         <form method="POST" action='/schedule/new/' class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
             {% csrf_token %}
-            <div class="relative flex-grow w-full">
-                <label for="id_worker" class="leading-7 text-sm text-gray-600">Инструктор</label>
-                <select type="text" id="id_worker" name="id_worker" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
-                    <option value="" selected>---------</option>
-                    <option value="1">admin</option>
-                </select>
-            </div>
-            <div class="relative flex-grow w-full">
-                <label for="id_discipline" class="leading-7 text-sm text-gray-600">Дисциплина</label>
-                <select type="text" id="id_discipline" name="id_discipline" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
-                      <option value="" selected>---------</option>
-                      <option value="1">Практическое вождение</option>
-                </select>
-            </div>
-            <div class="relative flex-grow w-full">
-                <label for="id_date_class" class="leading-7 text-sm text-gray-600">Дата</label>
-                <input type="date" id="id_date_class" name="date_class" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
-            </div>
-            <div class="relative flex-grow w-full">
-                <label for="id_time_class" class="leading-7 text-sm text-gray-600">Время</label>
-                <input type="time" id="id_time_class" required name="time_class" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-red-500 focus:bg-transparent focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out">
-            </div>
-             <button class="text-white bg-red-500 border-0 text-sm font-medium py-2 px-4 focus:outline-none hover:bg-red-600 rounded" type='submit'>Добавить</button>
+            {{ form.as_p }}
+             <button class="text-white bg-red-500 border-0 text-sm font-medium py-2 px-4 focus:outline-none hover:bg-red-600 rounded" type='submit'>
+                Добавить
+            </button>
         </form>
     </div>
 </section>

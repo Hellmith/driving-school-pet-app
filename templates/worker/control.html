@@ -1,0 +1,112 @@
+{% extends '../base.html' %} {% load static %} {% block title %} Личный кабинет
+{% endblock title %} {% block content %}
+
+<header class="text-gray-600 body-font border-b">
+  <div
+    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+  >
+    <a
+      class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+    >
+      <span class="text-xl">Tailblocks</span>
+    </a>
+    <nav
+      class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+    >
+      <a
+        class="mr-5 cursor-pointer hover:text-gray-900"
+        href="{% url 'profile' %}"
+      >
+        Карточка
+      </a>
+      <a
+        class="mr-5 cursor-pointer hover:text-gray-900"
+        href="{% url 'control' %}"
+      >
+        Управление
+      </a>
+    </nav>
+    <a
+      class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+      href="{% url 'logout' %}"
+    >
+      Выход
+      <svg
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-4 h-4 ml-1"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</header>
+<main>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap flex-col">
+      <div class="flex mx-auto flex-wrap mb-20">
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-5 h-5 mr-3"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+          >Пользователи
+        </a>
+
+        {% comment %}
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+        >
+          <svg
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="w-5 h-5 mr-3"
+            viewBox="0 0 24 24"
+          >
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle></svg
+          >STEP 4
+        </a>
+        {% endcomment %}
+      </div>
+      <table class="table-auto text-sm">
+        <thead class='text-gray-900'>
+          <tr>
+            <th class='py-2 pr-4 font-medium'>#</th>
+            <th class='py-2 pr-4 font-medium'>ФИО</th>
+            <th class='py-2 pr-4 font-medium'>Дата рождения</th>
+            <th class='py-2 font-medium'>Телефон</th>
+            <th class='py-2 font-medium'>Почта</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% comment %} {% for s in schedule %}
+          <tr>
+            <td class='py-2 pr-4'>{{s.id_cursant}}</td>
+            <td class='py-2 pr-4'> {{s.id_discipline}}</td>
+            <td class='py-2 pr-4'> {{s.date_class}}</td>
+            <td class='py-2'> {{s.time_class}}</td>
+          </tr>
+        {% endfor %} {% endcomment %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

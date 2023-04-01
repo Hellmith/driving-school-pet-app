@@ -5,11 +5,7 @@ from django.forms.widgets import HiddenInput
 from .models import Schedule
 
 
-class CursantPostSchedule(forms.ModelForm):
-    id_worker = forms.CharField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
-    id_discipline = forms.CharField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
-    date_class = forms.DateField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
-    time_class = forms.TimeField(widget=forms.HiddenInput(attrs={'readonly': True}), required=False)
+class CursantPostScheduleForm(forms.ModelForm):
 
     class Meta:
         model = Schedule

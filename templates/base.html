@@ -32,6 +32,13 @@
       };
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .errorList {
+          @apply hidden;
+        }
+      }
+    </style>
 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>

@@ -1,0 +1,31 @@
+{% extends "../base.html" %} {% block title %} Авторизация {% endblock %}
+{% block content %}
+<main class="w-screen h-screen flex items-center justify-center">
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+      <div
+        class="lg:w-96 mx-auto bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
+      >
+        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">
+          Вход в систему
+        </h2>
+        <form method="POST">
+          {% csrf_token %} {{form.as_div}}
+          <div class="mb-4 text-red-500 text-sm text-justify">
+            <p>{{ message }}</p>
+          </div>
+
+          <div class="flex flex-row-reverse items-center gap-4">
+            <button
+              class="text-white bg-red-500 border-0 py-2.5 px-4 transition ease-in-out w-full focus:outline-none hover:bg-red-600 rounded text-base font-medium"
+              type="submit"
+            >
+              Зарегистрироваться
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

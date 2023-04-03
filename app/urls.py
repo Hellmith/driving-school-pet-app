@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views
 
-from .views import HomeView, ProfileView, ScheduleView, ControlView, RedirectProfile
+from .views import HomeView, SignupView, ProfileView, ScheduleView, ControlView, RedirectProfile
 
 urlpatterns = [
     path('', HomeView.showPage, name='home'),
@@ -11,5 +11,6 @@ urlpatterns = [
     path('schedule/new/', ScheduleView.postPage, name='add-schedule'),
     path('control/', ControlView.showPage, name='control'),
     path('login/', views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    path('signup/', SignupView.showPage, name='signup'),
     path('accounts/profile/', RedirectProfile.showPage)
 ]

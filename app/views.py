@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 
 from .models import Training, Schedule, User, Discipline
-from .forms import CursantPostScheduleForm
+from .forms import CursantPostScheduleForm, SignupForm
 
 
 class HomeView(View):
@@ -65,13 +65,21 @@ class ScheduleView(View):
         return redirect('schedule')
 
     def postPage(request):
-        schedule_new = Schedule(id_worker=User.objects.get(id=request.POST['id_worker']),
-                                id_discipline=Discipline.objects.get(id=request.POST['id_discipline']),
-                                id_cursant=request.user,
-                                date_class=request.POST['date_class'],
-                                time_class=request.POST['time_class'])
+        date = request.POST['date_class']
+        time = request.POST['time_class']
 
-        schedule_new.save()
+        if Schedule.objects.filter(date_class=date) and Schedule.objects.filter(time_class=time):
+            message = 'На данное время инструктор занят! Выберите другой день или время.'
+            return render(request, 'cursant/schedule.html', {'message': message})
+
+        else:
+            schedule_new = Schedule(id_worker=User.objects.get(id=request.POST['id_worker']),
+                                    id_discipline=Discipline.objects.get(id=request.POST['id_discipline']),
+                                    id_cursant=request.user,
+                                    date_class=date,
+                                    time_class=time)
+
+            schedule_new.save()
 
         return redirect('schedule')
 
@@ -88,3 +96,31 @@ class RedirectProfile(View):
 
     def showPage(request):
         return redirect('/profile/')
+
+
+class SignupView(View):
+
+    def showPage(request):
+        message = ""
+
+        if request.user.is_authenticated:
+            return redirect("/profile/")
+        else:
+            if request.method == "GET":
+                form = SignupForm()
+
+            if request.method == "POST":
+                form = SignupForm(request.POST)
+
+                print(request.POST)
+
+                if form.is_valid():
+                    user = form
+                    user.save()
+                    message = "Успешная регистрация!"
+                    return redirect('/profile/')
+                else:
+                    message = "Введите корректные данные"
+                    form = SignupForm()
+
+            return render(request, "registration/signup.html", {"form": form, "message": message})

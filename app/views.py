@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 
-from .models import Training, Schedule, User, Discipline
+from .models import *
 from .forms import CursantPostScheduleForm, SignupForm
 
 
@@ -90,6 +90,37 @@ class ControlView(View):
     def showPage(request):
 
         return render(request, 'worker/control.html')
+
+    def usersControlPage(request):
+        users = User.objects.all()
+        print(users[0].id_post)
+
+        return render(request, 'worker/control-users.html', {'users': users})
+
+    def discliplinesControlPage(request):
+        disciplines = Discipline.objects.all()
+
+        return render(request, 'worker/control-disciplines.html', {'disciplines': disciplines})
+
+    def autosControlPage(request):
+        autos = Car.objects.all()
+
+        return render(request, 'worker/control-autos.html', {'autos': autos})
+
+    def regionsControlPage(request):
+        regions = Region.objects.all()
+
+        return render(request, 'worker/control-regions.html', {'regions': regions})
+
+    def citiesControlPage(request):
+        cities = City.objects.all()
+
+        return render(request, 'worker/control-cities.html', {'cities': cities})
+
+    def streetsControlPage(request):
+        streets = Street.objects.all()
+
+        return render(request, 'worker/control-streets.html', {'streets': streets})
 
 
 class RedirectProfile(View):

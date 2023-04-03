@@ -1,0 +1,130 @@
+{% extends '../base.html' %} {% load static %} {% block title %} Личный кабинет
+{% endblock title %} {% block content %}
+
+<header class="text-gray-600 body-font border-b">
+  <div
+    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+  >
+    <a
+      class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+    >
+      <span class="text-xl">Tailblocks</span>
+    </a>
+    <nav
+      class="md:ml-auto flex flex-wrap items-center text-base justify-center"
+    >
+      <a
+        class="mr-5 cursor-pointer hover:text-gray-900"
+        href="{% url 'profile' %}"
+      >
+        Карточка
+      </a>
+      <a
+        class="mr-5 cursor-pointer hover:text-gray-900"
+        href="{% url 'control' %}"
+      >
+        Управление
+      </a>
+    </nav>
+    <a
+      class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+      href="{% url 'logout' %}"
+    >
+      Выход
+      <svg
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-4 h-4 ml-1"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</header>
+<main>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto flex flex-wrap flex-col">
+      <div class="flex mx-auto flex-wrap mb-20">
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-users' %}"
+        >
+          Пользователи
+        </a>
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-disciplines' %}"
+        >
+          Дисциплины
+        </a>
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-autos' %}"
+        >
+          Автомобили
+        </a>
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-regions' %}"
+        >
+          Регионы
+        </a>
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-cities' %}"
+        >
+          Города
+        </a>
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+          href="{% url 'control-streets' %}"
+        >
+          Улицы
+        </a>
+      </div>
+      <table class="table-auto text-sm w-full max-w-6xl mx-auto">
+        <thead class="text-gray-900 bg-red-200">
+          <tr>
+            <th class="py-2 px-4 font-medium w-min">#</th>
+            <th class="py-2 px-4 font-medium w-1/6">Название</th>
+            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 w-1/6"></th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          {% for item in streets %}
+          <tr>
+            <td class="py-2 text-center">{{item.id}}</td>
+            <td class="py-2 text-center">{{item.name}}</td>
+            <td class="py-2 text-center"></td>
+            <td class="py-2 text-center"></td>
+            <td class="py-2 text-center"></td>
+            <td class="py-2 text-center"></td>
+            <td class="py-2 text-center">
+              <button
+                class="px-2 py-1.5 rounded-md text-center text-xs bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Ред
+              </button>
+              <button
+                class="px-2 py-1.5 rounded-md text-center text-xs bg-red-600 text-white hover:bg-red-700"
+              >
+                Удалить
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

@@ -3,7 +3,7 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 
 from .models import *
-from .forms import CursantPostScheduleForm, SignupForm
+from .forms import *
 
 
 class HomeView(View):
@@ -94,27 +94,94 @@ class ControlView(View):
     def usersControlPage(request):
         users = User.objects.all()
 
-        return render(request, 'worker/control-users.html', {'users': users})
+        form = WorkerPostUserForm(request.POST)
+
+        return render(request, 'worker/control-users.html', {'users': users, 'form': form})
+
+    def usersControlPostPage(request):
+        user_new = WorkerPostUserForm(request.POST)
+        user_new.save()
+
+        return redirect('/control/users/')
+
+    def usersControlDeletePage(request, id):
+        remove = User.objects.filter(id=id).delete()
+
+        return redirect('/control/users/')
+
+    # def usersControlUpdatePage(request, pk):
+    #     form = WorkerUpdateUserForm(request.POST)
+    #     user = User.objects.get(id=pk)
+
+    #     return render(request, 'worker/forms/update-user.html', {'user': user, 'form': form})
 
     def postsControlPage(request):
         posts = Post.objects.all()
+        form = WorkerPostPostForm(request.POST)
 
-        return render(request, 'worker/control-posts.html', {'posts': posts})
+        return render(request, 'worker/control-posts.html', {'posts': posts, 'form': form})
+
+    def postsControlPostPage(request):
+        post_new = WorkerPostPostForm(request.POST)
+        post_new.save()
+
+        return redirect('/control/posts/')
+
+    def postsControlDeletePage(request, id):
+        remove = Post.objects.filter(id=id).delete()
+
+        return redirect('/control/posts/')
 
     def trainingsControlPage(request):
         trainings = Training.objects.all()
+        form = WorkerPostTrainingForm(request.POST)
 
-        return render(request, 'worker/control-trainings.html', {'trainings': trainings})
+        return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form})
+
+    def trainingsControlPostPage(request):
+        training_new = WorkerPostTrainingForm(request.POST)
+        training_new.save()
+
+        return redirect('/control/trainings/')
+
+    def trainingsControlDeletePage(request, id):
+        remove = Training.objects.filter(id=id).delete()
+
+        return redirect('/control/trainings/')
 
     def drivingsControlPage(request):
         drivings = Driving.objects.all()
+        form = WorkerPostDrivingForm(request.POST)
 
-        return render(request, 'worker/control-driving.html', {'drivings': drivings})
+        return render(request, 'worker/control-driving.html', {'drivings': drivings, 'form': form})
+
+    def drivingsControlPostPage(request):
+        driving_new = WorkerPostDrivingForm(request.POST)
+        driving_new.save()
+
+        return redirect('/control/driving/')
+
+    def drivingsControlDeletePage(request, id):
+        remove = Driving.objects.filter(id=id).delete()
+
+        return redirect('/control/driving/')
 
     def coursesControlPage(request):
         courses = Course.objects.all()
+        form = WorkerPostCourseForm(request.POST)
 
-        return render(request, 'worker/control-courses.html', {'courses': courses})
+        return render(request, 'worker/control-courses.html', {'courses': courses, 'form': form})
+
+    def coursesControlPostPage(request):
+        course_new = WorkerPostCourseForm(request.POST)
+        course_new.save()
+
+        return redirect('/control/courses/')
+
+    def coursesControlDeletePage(request, id):
+        remove = Course.objects.filter(id=id).delete()
+
+        return redirect('/control/courses/')
 
     def discliplinesControlPage(request):
         disciplines = Discipline.objects.all()

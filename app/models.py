@@ -111,10 +111,10 @@ class User(AbstractUser):
     tel = models.CharField(blank=True, null=True, max_length=12, verbose_name='Телефон')
 
     status = models.CharField(max_length=255, blank=True, null=True, verbose_name='Статус')
-    is_cursant = models.BooleanField(default=False, verbose_name='Курсант')
+    is_cursant = models.BooleanField(default=False, blank=True, verbose_name='Курсант')
 
     id_post = models.ForeignKey('Post', on_delete=models.CASCADE, blank=True, null=True, verbose_name='Должность')
-    is_worker = models.BooleanField(default=False, verbose_name='Сотрудник')
+    is_worker = models.BooleanField(default=False, blank=True, verbose_name='Сотрудник')
 
     class Meta:
         verbose_name = 'пользователь'

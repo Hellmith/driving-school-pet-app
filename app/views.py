@@ -89,18 +89,32 @@ class ControlView(View):
 
     def showPage(request):
 
-        return render(request, 'worker/control.html')
+        return redirect('/control/users/')
 
     def usersControlPage(request):
         users = User.objects.all()
-        print(users[0].id_post)
 
         return render(request, 'worker/control-users.html', {'users': users})
+
+    def postsControlPage(request):
+        posts = Post.objects.all()
+
+        return render(request, 'worker/control-posts.html', {'posts': posts})
+
+    def drivingsControlPage(request):
+        drivings = Driving.objects.all()
+
+        return render(request, 'worker/control-driving.html', {'drivings': drivings})
 
     def discliplinesControlPage(request):
         disciplines = Discipline.objects.all()
 
         return render(request, 'worker/control-disciplines.html', {'disciplines': disciplines})
+
+    def categoriesControlPage(request):
+        categories = Category.objects.all()
+
+        return render(request, 'worker/control-categories.html', {'categories': categories})
 
     def autosControlPage(request):
         autos = Car.objects.all()

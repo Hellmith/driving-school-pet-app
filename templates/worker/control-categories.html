@@ -56,12 +56,13 @@
           Пользователи
         </a>
         <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"  href="{% url 'control-posts' %}"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-posts' %}"
         >
           Должности
         </a>
         <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-driving' %}"
         >
           Вождения
@@ -72,8 +73,8 @@
         >
           Дисциплины
         </a>
-         <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
           href="{% url 'control-categories' %}"
         >
           Категории
@@ -97,7 +98,7 @@
           Города
         </a>
         <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-streets' %}"
         >
           Улицы
@@ -115,12 +116,12 @@
             <th class="py-2 px-4 w-1/6"></th>
           </tr>
         </thead>
-        <tbody class="text-gray-700">
-          {% for item in streets %}
+        <tbody class="text-gray-700 justify-between">
+          {% for item in categories %}
           <tr>
-            <td class="py-2 text-center">{{item.id}}</td>
-            <td class="py-2 text-center">{{item.name}}</td>
-            <td class="py-2 text-center"></td>
+            <td class="py-2 px-4 text-center">{{item.id}}</td>
+            <td class="py-2 px-4 text-center">{{item.name_category}}</td>
+            <td class="py-2 px-4 text-center"></td>
             <td class="py-2 text-center"></td>
             <td class="py-2 text-center"></td>
             <td class="py-2 text-center"></td>

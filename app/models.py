@@ -166,7 +166,7 @@ class Schedule(models.Model):
         verbose_name_plural = 'расписания'
 
     def __str__(self):
-        return '%i' % (self.id)
+        return '%s %s %s' % (self.id_cursant, self.date_class, self.time_class)
 
 
 # АВТОМОБИЛИ
@@ -196,4 +196,4 @@ class Driving(models.Model):
         verbose_name_plural = 'вождения'
 
     def __str__(self):
-        return self.id
+        return '%s %s %s' % (self.id_cursant, self.id_schedule, self.result)

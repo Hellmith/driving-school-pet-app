@@ -51,17 +51,17 @@
       <div class="flex mx-auto flex-wrap mb-20">
         <a
           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-users' %}"
+          href="{% url 'control-driving' %}"
         >
           Пользователи
         </a>
-        <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"  href="{% url 'control-posts' %}"
+         <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
         >
           Должности
         </a>
         <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-driving' %}"
         >
           Вождения
@@ -97,7 +97,7 @@
           Города
         </a>
         <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-streets' %}"
         >
           Улицы
@@ -116,15 +116,15 @@
           </tr>
         </thead>
         <tbody class="text-gray-700">
-          {% for item in streets %}
+          {% for item in posts %}
           <tr>
-            <td class="py-2 text-center">{{item.id}}</td>
-            <td class="py-2 text-center">{{item.name}}</td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center">
+            <td class="py-2 px-4 text-center">{{item.id}}</td>
+            <td class="py-2 px-4 text-center">{{item.name}}</td>
+            <td class="py-2 px-4 text-center"></td>
+            <td class="py-2 px-4 text-center"></td>
+            <td class="py-2 px-4 text-center"></td>
+            <td class="py-2 px-4 text-center"></td>
+            <td class="py-2 px-4 text-center">
               <button
                 class="px-2 py-1.5 rounded-md text-center text-xs bg-blue-600 text-white hover:bg-blue-700"
               >

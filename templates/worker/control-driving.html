@@ -61,7 +61,7 @@
           Должности
         </a>
         <a
-           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
           href="{% url 'control-driving' %}"
         >
           Вождения
@@ -97,7 +97,7 @@
           Города
         </a>
         <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-streets' %}"
         >
           Улицы
@@ -107,22 +107,22 @@
         <thead class="text-gray-900 bg-red-200">
           <tr>
             <th class="py-2 px-4 font-medium w-min">#</th>
-            <th class="py-2 px-4 font-medium w-1/6">Название</th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 font-medium w-1/6">Курсант</th>
+            <th class="py-2 px-4 font-medium w-1/6">Расписание</th>
+            <th class="py-2 px-4 font-medium w-1/6">Машина</th>
+            <th class="py-2 px-4 font-medium w-1/6">Результат</th>
             <th class="py-2 px-4 w-1/6"></th>
             <th class="py-2 px-4 w-1/6"></th>
           </tr>
         </thead>
-        <tbody class="text-gray-700">
-          {% for item in streets %}
+        <tbody class="text-gray-700 justify-between">
+          {% for item in drivings %}
           <tr>
-            <td class="py-2 text-center">{{item.id}}</td>
-            <td class="py-2 text-center">{{item.name}}</td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
+            <td class="py-2 px-4 text-center">{{item.id}}</td>
+            <td class="py-2 px-4 text-center">{{item.id_cursant}}</td>
+            <td class="py-2 px-4 text-center">{{item.id_schedule}}ч</td>
+            <td class="py-2 px-4 text-center">{{item.id_car}}</td>
+            <td class="py-2 px-4 text-center">{{item.result}}</td>
             <td class="py-2 text-center"></td>
             <td class="py-2 text-center">
               <button

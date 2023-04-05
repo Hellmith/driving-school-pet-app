@@ -101,6 +101,11 @@ class ControlView(View):
 
         return render(request, 'worker/control-posts.html', {'posts': posts})
 
+    def trainingsControlPage(request):
+        trainings = Training.objects.all()
+
+        return render(request, 'worker/control-trainings.html', {'trainings': trainings})
+
     def drivingsControlPage(request):
         drivings = Driving.objects.all()
 

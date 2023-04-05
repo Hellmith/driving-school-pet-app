@@ -51,17 +51,18 @@
       <div class="flex mx-auto flex-wrap mb-20">
         <a
           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-driving' %}"
+          href="{% url 'control-users' %}"
         >
           Пользователи
         </a>
         <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+          href="{% url 'control-posts' %}"
         >
           Должности
         </a>
-         <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
+        <a
+          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
           href="{% url 'control-trainings' %}"
         >
           Обучения
@@ -119,24 +120,30 @@
         <thead class="text-gray-900 bg-red-200">
           <tr>
             <th class="py-2 px-4 font-medium w-min">#</th>
-            <th class="py-2 px-4 font-medium w-1/6">Название</th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2 px-4 font-medium">Курсант</th>
+            <th class="py-2 px-4 font-medium">Курс</th>
+            <th class="py-2 px-4 font-medium">Договор #</th>
+            <th class="py-2 px-4 font-medium">Дата договора</th>
+            <th class="py-2 px-4 font-medium">Свидетельство</th>
+            <th class="py-2 px-4 font-medium">Дата зачисления</th>
+            <th class="py-2 px-4 font-medium">Стоимость</th>
+            <th class="py-2 px-4 font-medium">Статус оплаты</th>
+            <th class="py-2 px-4"></th>
           </tr>
         </thead>
-        <tbody class="text-gray-700">
-          {% for item in posts %}
+        <tbody class="text-gray-700 justify-between">
+          {% for item in trainings %}
           <tr>
             <td class="py-2 px-4 text-center">{{item.id}}</td>
-            <td class="py-2 px-4 text-center">{{item.name}}</td>
-            <td class="py-2 px-4 text-center"></td>
-            <td class="py-2 px-4 text-center"></td>
-            <td class="py-2 px-4 text-center"></td>
-            <td class="py-2 px-4 text-center"></td>
-            <td class="py-2 px-4 text-center">
+            <td class="py-2 px-4 text-center">{{item.id_cursant}}</td>
+            <td class="py-2 px-4 text-center">{{item.id_course}}</td>
+            <td class="py-2 px-4 text-center">{{item.agreement_number}}</td>
+            <td class="py-2 px-4 text-center">{{item.date_agreement}}</td>
+            <td class="py-2 text-center">{{item.certificate}}</td>
+            <td class="py-2 text-center">{{item.date_record}}</td>
+            <td class="py-2 text-center">{{item.price}}</td>
+            <td class="py-2 text-center">{{item.payment_status}}</td>
+            <td class="py-2 text-center">
               <button
                 class="px-2 py-1.5 rounded-md text-center text-xs bg-blue-600 text-white hover:bg-blue-700"
               >

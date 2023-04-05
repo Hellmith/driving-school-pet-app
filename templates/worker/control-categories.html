@@ -47,8 +47,8 @@
 </header>
 <main>
   <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto flex flex-wrap flex-col">
-      <div class="flex mx-auto flex-wrap mb-20">
+    <div class="cotainer mx-auto flex flex-wrap flex-col">
+      <div class="flex mx-auto flex-wrap mb-5">
         <a
           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-users' %}"
@@ -61,7 +61,7 @@
         >
           Должности
         </a>
-         <a
+        <a
           class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
           href="{% url 'control-trainings' %}"
         >
@@ -116,16 +116,12 @@
           Улицы
         </a>
       </div>
-      <table class="table-auto text-sm w-full max-w-6xl mx-auto">
-        <thead class="text-gray-900 bg-red-200">
+      <table class="table-auto text-sm w-full max-w-7xl mx-auto rounded-lg">
+        <thead class="text-gray-900 font-semibold bg-red-100">
           <tr>
-            <th class="py-2 px-4 font-medium w-min">#</th>
-            <th class="py-2 px-4 font-medium w-1/6">Название</th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
-            <th class="py-2 px-4 w-1/6"></th>
+            <th class="py-2.5 w-min">#</th>
+            <th>Название</th>
+            <th class="w-min"></th>
           </tr>
         </thead>
         <tbody class="text-gray-700 justify-between">
@@ -133,10 +129,6 @@
           <tr>
             <td class="py-2 px-4 text-center">{{item.id}}</td>
             <td class="py-2 px-4 text-center">{{item.name_category}}</td>
-            <td class="py-2 px-4 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
-            <td class="py-2 text-center"></td>
             <td class="py-2 text-center">
               <button
                 class="px-2 py-1.5 rounded-md text-center text-xs bg-blue-600 text-white hover:bg-blue-700"

@@ -13,6 +13,7 @@ urlpatterns = [
     path('control/users/', ControlView.usersControlPage, name='control-users'),
     path('control/posts/', ControlView.postsControlPage, name='control-posts'),
     path('control/driving/', ControlView.drivingsControlPage, name='control-driving'),
+    path('control/courses/', ControlView.coursesControlPage, name='control-courses'),
     path('control/disciplines/', ControlView.discliplinesControlPage, name='control-disciplines'),
     path('control/categories/', ControlView.categoriesControlPage, name='control-categories'),
     path('control/cars/', ControlView.autosControlPage, name='control-autos'),

@@ -106,6 +106,11 @@ class ControlView(View):
 
         return render(request, 'worker/control-driving.html', {'drivings': drivings})
 
+    def coursesControlPage(request):
+        courses = Course.objects.all()
+
+        return render(request, 'worker/control-courses.html', {'courses': courses})
+
     def discliplinesControlPage(request):
         disciplines = Discipline.objects.all()
 

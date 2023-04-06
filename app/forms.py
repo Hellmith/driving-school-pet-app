@@ -52,12 +52,46 @@ class WorkerPostCourseForm(forms.ModelForm):
         fields = '__all__'
 
 
-# class WorkerUpdateUserForm(forms.ModelForm):
-#     date_of_birthday = forms.DateField(widget=forms.SelectDateWidget(), label='Дата рождения')
+class WorkerPostDisciplineForm(forms.ModelForm):
 
-#     class Meta:
-#         model = User
-#         fields = '__all__'
+    class Meta:
+        model = Discipline
+        fields = '__all__'
+
+
+class WorkerPostCategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class WorkerPostCarForm(forms.ModelForm):
+
+    class Meta:
+        model = Car
+        fields = '__all__'
+
+
+class WorkerPostRegionForm(forms.ModelForm):
+
+    class Meta:
+        model = Region
+        fields = '__all__'
+
+
+class WorkerPostCityForm(forms.ModelForm):
+
+    class Meta:
+        model = City
+        fields = '__all__'
+
+
+class WorkerPostStreetForm(forms.ModelForm):
+
+    class Meta:
+        model = Street
+        fields = '__all__'
 
 
 class SignupForm(UserCreationForm):

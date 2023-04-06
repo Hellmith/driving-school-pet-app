@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 from .models import *
 from .forms import *
+"""
+Этот код импортирует необходимые модули, классы, модели и формы из различных файлов. Классы используются для отображения различных страниц веб-сайта, включая домашнюю страницу, страницу профиля, страницу расписания и страницы управления. Некоторые страницы, в том числе профиль, расписание и страницы управления, требуют, чтобы пользователь вошел в систему. Страницы управления, которые позволяют администраторам управлять пользователями веб-сайта, сообщениями, курсами и т. д., доступны только пользователям с соответствующими правами администратора. привилегии. Код также включает класс для регистрации пользователя (SignupView) и класс для перенаправления пользователя на страницу его профиля (RedirectProfile).
+"""
 
 
 class HomeView(View):
@@ -185,33 +188,105 @@ class ControlView(View):
 
     def discliplinesControlPage(request):
         disciplines = Discipline.objects.all()
+        form = WorkerPostDisciplineForm(request.POST)
 
-        return render(request, 'worker/control-disciplines.html', {'disciplines': disciplines})
+        return render(request, 'worker/control-disciplines.html', {'disciplines': disciplines, 'form': form})
+
+    def discliplinesControlPostPage(request):
+        discipline_new = WorkerPostDisciplineForm(request.POST)
+        discipline_new.save()
+
+        return redirect('/control/disciplines/')
+
+    def discliplinesControlDeletePage(request, id):
+        remove = Discipline.objects.filter(id=id).delete()
+
+        return redirect('/control/disciplines/')
 
     def categoriesControlPage(request):
         categories = Category.objects.all()
+        form = WorkerPostCategoryForm(request.POST)
 
-        return render(request, 'worker/control-categories.html', {'categories': categories})
+        return render(request, 'worker/control-categories.html', {'categories': categories, 'form': form})
+
+    def categoriesControlPostPage(request):
+        category_new = WorkerPostCategoryForm(request.POST)
+        category_new.save()
+
+        return redirect('/control/categories/')
+
+    def categoriesControlDeletePage(request, id):
+        remove = Category.objects.filter(id=id).delete()
+
+        return redirect('/control/categories/')
 
     def autosControlPage(request):
         autos = Car.objects.all()
+        form = WorkerPostCarForm(request.POST)
 
-        return render(request, 'worker/control-autos.html', {'autos': autos})
+        return render(request, 'worker/control-autos.html', {'autos': autos, 'form': form})
+
+    def autosControlPostPage(request):
+        car_new = WorkerPostCarForm(request.POST)
+        car_new.save()
+
+        return redirect('/control/cars/')
+
+    def autosControlDeletePage(request, id):
+        remove = Car.objects.filter(id=id).delete()
+
+        return redirect('/control/cars/')
 
     def regionsControlPage(request):
         regions = Region.objects.all()
+        form = WorkerPostRegionForm(request.POST)
 
-        return render(request, 'worker/control-regions.html', {'regions': regions})
+        return render(request, 'worker/control-regions.html', {'regions': regions, 'form': form})
+
+    def regionsControlPostPage(request):
+        region_new = WorkerPostRegionForm(request.POST)
+        region_new.save()
+
+        return redirect('/control/regions/')
+
+    def regionsControlDeletePage(request, id):
+        remove = Region.objects.filter(id=id).delete()
+
+        return redirect('/control/regions/')
 
     def citiesControlPage(request):
         cities = City.objects.all()
+        form = WorkerPostCityForm(request.POST)
 
-        return render(request, 'worker/control-cities.html', {'cities': cities})
+        return render(request, 'worker/control-cities.html', {'cities': cities, 'form': form})
+
+    def citiesControlPostPage(request):
+        city_new = WorkerPostCityForm(request.POST)
+        city_new.save()
+
+        return redirect('/control/cities/')
+
+    def citiesControlDeletePage(request, id):
+        remove = City.objects.filter(id=id).delete()
+
+        return redirect('/control/cities/')
 
     def streetsControlPage(request):
         streets = Street.objects.all()
+        form = WorkerPostStreetForm(request.POST)
 
-        return render(request, 'worker/control-streets.html', {'streets': streets})
+        return render(request, 'worker/control-streets.html', {'streets': streets, 'form': form})
+
+    def streetsControlPostPage(request):
+        city_new = WorkerPostStreetForm(request.POST)
+        city_new.save()
+
+        return redirect('/control/streets/')
+
+    def streetsControlDeletePage(request, id):
+        remove = Street.objects.filter(id=id).delete()
+
+        return redirect('/control/streets/')
 
 
 class RedirectProfile(View):

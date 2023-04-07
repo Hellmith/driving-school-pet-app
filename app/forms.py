@@ -6,15 +6,16 @@ from .models import *
 
 
 class CursantPostScheduleForm(forms.ModelForm):
-    date_class = forms.DateField(widget=forms.SelectDateWidget(), label='Дата занятия')
+    date_class = forms.DateField(
+        widget=forms.SelectDateWidget(), label='Дата занятия')
 
     class Meta:
         model = Schedule
-        fields = fields = ["id_worker", "id_discipline", "date_class", "time_class"]
+        fields = fields = ["id_worker",
+                           "id_discipline", "date_class", "time_class"]
 
 
-class WorkerPostUserForm(forms.ModelForm):
-    date_of_birthday = forms.DateField(widget=forms.SelectDateWidget(), label='Дата рождения')
+class WorkerPostUserForm(UserCreationForm):
 
     class Meta:
         model = User
@@ -95,9 +96,12 @@ class WorkerPostStreetForm(forms.ModelForm):
 
 
 class SignupForm(UserCreationForm):
-    is_worker = forms.BooleanField(widget=forms.HiddenInput(attrs={'readonly': True, 'value': 1}), required=False)
-    id_post = forms.ModelChoiceField(queryset=Post.objects.all(), widget=forms.HiddenInput(attrs={'readonly': True, 'value': 1}), required=False)
+    is_worker = forms.BooleanField(widget=forms.HiddenInput(
+        attrs={'readonly': True, 'value': 1}), required=False)
+    id_post = forms.ModelChoiceField(queryset=Post.objects.all(
+    ), widget=forms.HiddenInput(attrs={'readonly': True, 'value': 1}), required=False)
 
     class Meta:
         model = User
-        fields = ["last_name", "first_name", "patronymic", "username", "password1", "password2", "is_worker", 'id_post']
+        fields = ["last_name", "first_name", "patronymic", "username",
+                  "password1", "password2", "is_worker", 'id_post']

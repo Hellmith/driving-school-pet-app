@@ -21,7 +21,7 @@ class WorkerPostUserForm(UserCreationForm):
         model = User
         fields = [
             'first_name', 'last_name', 'patronymic', 'date_of_birthday', 'id_region', 'id_city', 'id_street', 'house', 'apartment', 'tel', 'username',
-             'is_cursant', 'id_post', 'is_worker'
+            'is_cursant', 'id_post', 'is_worker'
         ]
 
 

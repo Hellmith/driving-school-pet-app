@@ -8,10 +8,6 @@
     <title>Автошкола — {% block title %}{% endblock title %}</title>
 
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"
     />
@@ -19,13 +15,6 @@
     <script>
       tailwind.config = {
         darkMode: "class",
-        theme: {
-          fontFamily: {
-            sans: ["Roboto", "sans-serif"],
-            body: ["Roboto", "sans-serif"],
-            mono: ["ui-monospace", "monospace"],
-          },
-        },
         corePlugins: {
           preflight: false,
         },
@@ -35,15 +24,16 @@
     <style type="text/tailwindcss">
       @layer base {
         select {
-          @apply w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out;
+          @apply w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out focus:outline-none;
         }
 
         form > div {
           @apply flex flex-col;
         }
 
+
         input {
-          @apply w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out;
+          @apply w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 px-3 leading-8 transition-colors duration-200 ease-in-out focus:outline-none;
         }
 
         fieldset {

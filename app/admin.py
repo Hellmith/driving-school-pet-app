@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Category, Course, Discipline, Region, City, Street, Post, User, Training, Schedule, Car, Driving
+from django.contrib.auth.models import Group
 
+admin.site.unregister(Group)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

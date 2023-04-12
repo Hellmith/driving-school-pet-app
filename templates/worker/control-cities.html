@@ -2,9 +2,7 @@
 {% endblock title %} {% block content %}
 
 <header class="text-gray-600 body-font border-b">
-  <div
-    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
-  >
+  <div class="flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a
       class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
     >
@@ -47,114 +45,124 @@
 </header>
 <main>
   <section class="text-gray-600 body-font">
-    <div class="cotainer mx-auto flex flex-wrap flex-col">
-      <div class="flex mx-auto flex-wrap mb-5">
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-users' %}"
+    <div class="flex mx-auto flex-wrap mb-4">
+      <a
+        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-users' %}"
+      >
+        Пользователи
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-posts' %}"
         >
-          Пользователи
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-posts' %}"
+        Должности
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-trainings' %}"
+      >
+        Обучения
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-drivings' %}"
+      >
+        Вождения
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-courses' %}"
+      >
+        Курсы
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-disciplines' %}"
+      >
+        Дисциплины
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-categories' %}"
+      >
+        Категории
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-autos' %}"
+      >
+        Автомобили
+      </a>
+      <a
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-regions' %}"
+      >
+        Регионы
+      </a>
+      <a
+      class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
+      >
+        Города
+      </a>
+      <a
+        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-streets' %}"
+      >
+        Улицы
+      </a>
+    </div>
+    <div class="grid grid-cols-4">
+      <div class="col-span-1 w-full px-4">
+        <form
+          method="POST"
+          action="/control/city/new/"
+          class="w-full items-center p-4 bg-gray-100 grid grid-cols-2 items-center justify-center gap-4"
         >
-          Должности
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-trainings' %}"
-        >
-          Обучения
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-driving' %}"
-        >
-          Вождения
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-courses' %}"
-        >
-          Курсы
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-disciplines' %}"
-        >
-          Дисциплины
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-categories' %}"
-        >
-          Категории
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-autos' %}"
-        >
-          Автомобили
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-regions' %}"
-        >
-          Регионы
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider rounded-t"
-          href="{% url 'control-cities' %}"
-        >
-          Города
-        </a>
-        <a
-          class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 tracking-wider"
-          href="{% url 'control-streets' %}"
-        >
-          Улицы
-        </a>
-      </div>
-      <section class="text-gray-600 body-font">
-        <div class="max-w-7xl py-24 mx-auto">
-          <form
-            method="POST"
-            action="/control/cities/new/"
-            class="w-full mx-auto space-y-4 items-end grid grid-cols-5 gap-4"
+          {% csrf_token %} {{ form.as_div }}
+          <button
+            class="text-white bg-red-500 border-0 col-span-2 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
+            type="submit"
           >
-            {% csrf_token %} {{ form.as_div }}
-            <button
-              class="text-white bg-red-500 border-0 text-sm font-medium py-2 px-4 focus:outline-none hover:bg-red-600 rounded"
-              type="submit"
-            >
-              Добавить
-            </button>
-          </form>
-        </div>
-      </section>
-      <table class="table-auto text-sm w-full max-w-7xl mx-auto rounded-lg">
-        <thead class="text-gray-900 font-semibold bg-red-100">
-          <tr>
-            <th class="py-2.5 w-min">#</th>
-            <th>Название</th>
-            <th>Регион</th>
-            <th class="w-min"></th>
+            Добавить
+          </button>
+        </form>
+      </div>
+      <div class="col-span-3 pr-4 w-full">
+        <table class="table-auto w-full">
+          <thead class="text-gray-900 w-full font-medium text-sm bg-gray-100">
+            <tr class="w-full">
+              <th class="px-4 py-2 w-min">#</th>
+              <th class="px-4 py-2 w-min">Название</th>
+              <th class="px-4 py-2 w-min">Регион</th>
+              <th class="px-4 py-2 w-min"></th>
           </tr>
         </thead>
-        <tbody class="text-gray-700 justify-between">
+        <tbody class="text-gray-700 text-sm overflow-y-auto">
           {% for item in cities %}
           <tr>
-            <td class="py-2 px-4 text-center">{{item.id}}</td>
-            <td class="py-2 px-4 text-center">{{item.name}}</td>
-            <td class="py-2 px-4 text-center">{{item.id_region}}</td>
-            <td class="py-2 text-center">
+            <td class="px-4 py-2 text-center">{{item.id}}</td>
+            <td class="px-4 py-2 text-center">{{item.name}}</td>
+            <td class="px-4 py-2 text-center">{{item.id_region}}</td>
+            <td class="px-2 py-2 flex items-center justify-center gap-2 border-l">
               <a
-                class="px-2 py-1.5 rounded-md text-center text-xs bg-red-600 text-white hover:bg-red-700"
-                href='{% url "remove-city" item.id %}'
-              >
-                Удалить
-              </a>
+                class="px-2 py-2 rounded-md inline-flex items-center bg-blue-300 hover:bg-blue-400 justify-center ease-in-out transition-all"
+                  href='{% url "update-city" item.id %}' title='Редактировать'
+                >
+                  <img
+                    class="w-4 h-auto text-white"
+                    src="{% static 'icons/edit.svg' %}"
+                  />
+                </a>city
+                <a
+                  class="px-2 py-2 rounded-md inline-flex items-center bg-red-300 hover:bg-red-400 justify-center ease-in-out transition-all"
+                  href='{% url "remove-region" item.id %}' title='Удалить'
+                >
+                  <img
+                    class="w-4 h-auto"
+                    src="{% static 'icons/trash.svg' %}"
+                  />
+                </a>
             </td>
           </tr>
           {% endfor %}

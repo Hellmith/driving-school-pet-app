@@ -47,49 +47,48 @@
   <section class="text-gray-600 body-font">
     <div class="flex mx-auto flex-wrap mb-4">
       <a
-        class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-users' %}"
       >
         Пользователи
       </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      <a class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
         href="{% url 'control-posts' %}"
       >
         Должности
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-trainings' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-trainings' %}"
       >
         Обучения
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-drivings' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-drivings' %}"
       >
         Вождения
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-courses' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-courses' %}"
       >
         Курсы
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-disciplines' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-disciplines' %}"   
       >
         Дисциплины
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-categories' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-categories' %}"
       >
         Категории
       </a>
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-autos' %}"
+      class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
       >
         Автомобили
       </a>
@@ -113,7 +112,7 @@
       </a>
     </div>
     <div class='mb-4 ml-4'>
-      <a class='bg-red-500 text-white hover:bg-red-600 ease-in-out transition-all px-4 py-2 rounded-md' href='{% url 'control-users' %}'>
+      <a class='bg-red-500 text-white hover:bg-red-600 ease-in-out transition-all px-4 py-2 rounded-md' href='{% url 'control-courses' %}'>
         Вернуться назад
       </a>
     </div>
@@ -122,11 +121,11 @@
           <form
             method="POST"
             action=""
-            class="w-full items-center p-4 bg-gray-100 grid grid-cols-2 gap-4"
+            class="w-full items-center p-4 bg-gray-100 grid gap-4"
           >
             {% csrf_token %} {{ form.as_div }}
             <button
-            class="text-white bg-red-500 col-span-2 border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
+            class="text-white bg-red-500  border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
             type="submit"
           >
             Обновить

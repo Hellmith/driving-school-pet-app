@@ -1,4 +1,4 @@
-{% extends '../base.html' %} {% load static %} {% block title %} Личный кабинет
+{% extends '../../base.html' %} {% load static %} {% block title %} Личный кабинет
 {% endblock title %} {% block content %}
 
 <header class="text-gray-600 body-font border-b">
@@ -47,25 +47,24 @@
   <section class="text-gray-600 body-font">
     <div class="flex mx-auto flex-wrap mb-4">
       <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-users' %}"
+      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      href="{% url 'control-users' %}"
       >
         Пользователи
       </a>
-      <a
-      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+      <a class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
         href="{% url 'control-posts' %}"
-        >
+      >
         Должности
       </a>
       <a
-      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-trainings' %}"
+      class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
       >
         Обучения
       </a>
       <a
-      class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
+        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+        href="{% url 'control-drivings' %}"
       >
         Вождения
       </a>
@@ -112,66 +111,28 @@
         Улицы
       </a>
     </div>
-    <div class="grid grid-cols-4">
-      <div class="col-span-1 w-full px-4">
-        <form
-          method="POST"
-          action="/control/driving/new/"
-          class="w-full items-center p-4 bg-gray-100 grid grid-cols-2 items-center justify-center gap-4"
-        >
-          {% csrf_token %} {{ form.as_div }}
-          <button
-            class="text-white bg-red-500 border-0 col-span-2 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
+    <div class='mb-4 ml-4'>
+      <a class='bg-red-500 text-white hover:bg-red-600 ease-in-out transition-all px-4 py-2 rounded-md' href='{% url 'control-trainings' %}'>
+        Вернуться назад
+      </a>
+    </div>
+      <section class="text-gray-600 body-font">
+        <div class="max-w-md py-12 mx-auto">
+          <form
+            method="POST"
+            action=""
+            class="w-full items-center p-4 bg-gray-100 grid gap-4"
+          >
+            {% csrf_token %} {{ form.as_div }}
+            <button
+            class="text-white bg-red-500  border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
             type="submit"
           >
-            Добавить
+            Обновить
           </button>
-        </form>
-      </div>
-      <div class="col-span-3 pr-4 w-full">
-        <table class="table-auto w-full">
-          <thead class="text-gray-900 w-full font-medium text-sm bg-gray-100">
-            <tr class="w-full">
-              <th class="px-4 py-2 w-min">#</th>
-              <th class="w-auto px-4 py-2">Курсант</th>
-              <th class="w-auto px-4 py-2">Расписание</th>
-              <th class="w-auto px-4 py-2">Машина</th>
-              <th class="w-auto px-4 py-2">Результат</th>
-              <th class="w-auto px-4 py-2"></th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-700 text-sm overflow-y-auto">
-          {% for item in drivings %}
-          <tr>
-            <td class="px-4 py-2 text-center">{{item.id}}</td>
-            <td class="px-4 py-2 text-center">{{item.id_cursant}}</td>
-            <td class="px-4 py-2 text-center">{{item.id_schedule}}ч</td>
-            <td class="px-4 py-2 text-center">{{item.id_car}}</td>
-            <td class="px-4 py-2 text-center">{{item.result}}</td>
-            <td class="px-2 py-2 flex items-center justify-center gap-2 border-l">
-              <a
-                class="px-2 py-2 rounded-md inline-flex items-center bg-blue-300 hover:bg-blue-400 justify-center ease-in-out transition-all"
-                  href='{% url "update-driving" item.id %}' title='Редактировать'
-                >
-                  <img
-                    class="w-4 h-auto text-white"
-                    src="{% static 'icons/edit.svg' %}"
-                  />
-                </a>
-                <a
-                  class="px-2 py-2 rounded-md inline-flex items-center bg-red-300 hover:bg-red-400 justify-center ease-in-out transition-all"
-                  href='{% url "remove-driving" item.id %}' title='Удалить'
-                >
-                  <img
-                    class="w-4 h-auto"
-                    src="{% static 'icons/trash.svg' %}"
-                  />
-                </a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </form>
+        </div>
+      </section>
     </div>
   </section>
 </main>

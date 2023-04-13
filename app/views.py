@@ -42,8 +42,8 @@ class ProfileView(View):
             elif user.is_worker and not user.id_post == 'Учебная часть':
                 return render(request, 'worker/profile.html', {'user': user})
                 
-            else:
-                return render(request, 'worker/profile-2.html', {'user': user})
+            elif user.is_worker and not user.id_post == 'Инструктор':
+                return redirect('/control/users/')
             
         else:
             return redirect('/login/')
@@ -56,6 +56,10 @@ class ScheduleView(View):
     def showPage(request):
         # Запрашиваем пользователя
         user = request.user
+        
+        if user.is_worker and not user.id_post == 'Инструктор':
+            return redirect('/control/users/')
+        
         # Если пользователь является курсантом
         if user.is_cursant:
             # Запрашиваем форму
@@ -85,8 +89,8 @@ class ScheduleView(View):
             else:
                 message = 'Данные о расписании не предоставлены или не существуют!'
                 return render(request, 'worker/schedule.html', {'schedule': schedule, 'message': message})
-
-        else:
+        
+        elif user.is_worker and not user.id_post == 'Инструктор':
             return redirect('/control/users/')
 
     def deletePage(request, id):

@@ -15,6 +15,12 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ["last_name", "first_name", "patronymic", "username", "password1", "password2", "is_worker", 'id_post']
 
+# Формы нахождение пользователей по группам
+class WorkerGetUsersByGroupForm(forms.ModelForm):
+    
+    class Meta:
+        model = Discipline
+        fields = ['type_class']
 
 # Формы расписание для курсантов
 class CursantPostScheduleForm(forms.ModelForm):

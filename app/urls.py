@@ -21,6 +21,12 @@ urlpatterns = [
 
     # Управление
     path('control/', ControlView.showPage, name='control'),
+    
+    # Группы
+    path('by-groups/', ControlView.usersByGroupPage, name='by-grops'),
+    
+    # Рассписания
+    path('schedules/', ControlView.usersSchedulesPage, name='schedules'),
 
     # Пользователи
     path('control/users/', ControlView.usersControlPage, name='control-users'),

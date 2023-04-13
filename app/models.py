@@ -33,7 +33,7 @@ class Course(models.Model):
 class Discipline(models.Model):
     name_discipline = models.CharField(max_length=255, verbose_name='Название дисциплины')
     count_hourse = models.IntegerField(verbose_name='Часов')
-    type_class = models.CharField(max_length=255, verbose_name='Тип класса')
+    type_class = models.CharField(max_length=255, verbose_name='Группа')
 
     class Meta:
         verbose_name = 'дисциплина'

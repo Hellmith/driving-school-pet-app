@@ -108,10 +108,10 @@ class ScheduleView(View):
 
         else:
             form = Schedule(id_worker=User.objects.get(id=request.POST['id_worker']),
-                                    id_discipline=Discipline.objects.get(id=request.POST['id_discipline']),
-                                    id_cursant=request.user,
-                                    date_class=date,
-                                    time_class=time)
+                            id_discipline=Discipline.objects.get(id=request.POST['id_discipline']),
+                            id_cursant=request.user,
+                            date_class=date,
+                            time_class=time)
             form.save()
 
         return redirect('/schedule/')
@@ -128,11 +128,28 @@ class ControlView(View, FormMixin):
         else:
             return redirect('/schedule/')
 
+
+    def usersByGroupPage(request):
+        form = WorkerGetUsersByGroupForm()
+        users = User.objects.filter(is_cursant=True)
+
+        if request.method == 'POST':
+            form = WorkerGetUsersByGroupForm(request.POST)
+            if form.is_valid():
+                group = form.cleaned_data['type_class']
+                users = User.objects.filter(schedule__id_discipline__type_class=group, is_cursant=True).order_by('schedule__id_discipline')
+        
+        return render(request, 'worker/groups.html', {'users': users, 'form': form})
+    
+    def usersSchedulesPage(request):
+        schedules = Schedule.objects.all()
+        return render(request, 'worker/schedules.html', {'schedules': schedules})
+
     # Пользователи
     def usersControlPage(request):
         users = User.objects.all()
         form = WorkerPostUserForm(request.POST)
-        
+
         return render(request, 'worker/control-users.html', {'users': users, 'form': form})
 
     # Отфильтрованные пользователи
@@ -145,19 +162,19 @@ class ControlView(View, FormMixin):
     def usersControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostUserForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/users/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostUserForm()
 
         users = User.objects.all()
         return render(request, 'worker/control-users.html', {'users': users, 'form': form, 'message': message})
-            
+
     # Удаление пользователя
     def usersControlDeletePage(request, id):
         remove = User.objects.filter(id=id).delete()
@@ -192,13 +209,13 @@ class ControlView(View, FormMixin):
     def postsControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostPostForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/posts/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostPostForm()
 
@@ -236,13 +253,13 @@ class ControlView(View, FormMixin):
     def trainingsControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostTrainingForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/trainings/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostTrainingForm()
 
@@ -280,13 +297,13 @@ class ControlView(View, FormMixin):
     def drivingsControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostDrivingForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/drivings/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostDrivingForm()
 
@@ -324,13 +341,13 @@ class ControlView(View, FormMixin):
     def coursesControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostCourseForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/courses/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostCourseForm()
 
@@ -368,13 +385,13 @@ class ControlView(View, FormMixin):
     def discliplinesControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostDisciplineForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/disciplines/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostDisciplineForm()
 
@@ -412,13 +429,13 @@ class ControlView(View, FormMixin):
     def categoriesControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostCategoryForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/categories/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostCategoryForm()
 
@@ -456,13 +473,13 @@ class ControlView(View, FormMixin):
     def autosControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostCarForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/cars/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostCarForm()
 
@@ -500,13 +517,13 @@ class ControlView(View, FormMixin):
     def regionsControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostRegionForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/regions/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostRegionForm()
 
@@ -544,13 +561,13 @@ class ControlView(View, FormMixin):
     def citiesControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostCityForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/cities/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostCityForm()
 
@@ -588,13 +605,13 @@ class ControlView(View, FormMixin):
     def streetsControlPostPage(request):
         if request.method == 'POST':
             form = WorkerPostStreetForm(request.POST)
-            
+
             if form.is_valid():
                 form.save()
                 return redirect('/control/streets/')
             else:
                 message = 'Ошибка заполнения данных'
-        
+
         else:
             form = WorkerPostStreetForm()
 

@@ -1,0 +1,34 @@
+{% extends '../base.html' %} {% load static %} {% block title %} Расписания {% endblock title %} {% block content %}
+{% block header %}
+{% include './includes/header-2.html' %} {% endblock header %}
+
+<main>
+	<section class="text-gray-600 flex flex-col body-font">
+			<div class="px-4 w-full">
+                <div class='mb-4'></div>
+				<table class="table-auto w-full">
+					<thead class="text-gray-900 w-full font-medium text-sm bg-gray-100">
+						<tr class="w-full">
+							<th class="w-auto px-4 py-2">Инструктор</th>
+							<th class="w-auto px-4 py-2">Курсант</th>
+							<th class="w-auto px-4 py-2">Дата начала</th>
+							<th class="w-auto px-4 py-2">Время начала</th>
+						</tr>
+					</thead>
+					<tbody class="text-gray-700 text-sm overflow-y-auto">
+						{% for item in schedules %}
+						<tr>
+							<td class="px-4 py-2 text-center">{{item.id_worker}}</td>
+							<td class="px-4 py-2 text-center">{{item.id_cursant}}</td>
+							<td class="px-4 py-2 text-center">{{item.date_class}}</td>
+							<td class="px-4 py-2 text-center">{{item.time_class}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</main>
+
+{% endblock content %}

@@ -39,16 +39,12 @@ class ProfileView(View):
                     message = 'Данные об обучении не предоставлены или не существуют!'
                     return render(request, 'cursant/profile.html', {'user': user, 'message': message})
             # Если пользователь является сотрудником
-            elif user.is_worker:
-                # Если его роль инструктор
-                if user.id_post == 'Инструктор':
-                    return render(request, 'worker/profile.html', {'user': user})
-                # Если его роль учебная часть
-                else:
-                    return render(request, 'worker/profile-2.html', {'user': user})
-
+            elif user.is_worker and not user.id_post == 'Учебная часть':
+                return render(request, 'worker/profile.html', {'user': user})
+                
             else:
-                return redirect('/admin/')
+                return render(request, 'worker/profile-2.html', {'user': user})
+            
         else:
             return redirect('/login/')
 
@@ -79,7 +75,7 @@ class ScheduleView(View):
                 return render(request, 'cursant/schedule.html', {'user': user, 'form': form, 'message': message})
 
         # Если инструктор
-        elif user.is_worker and user.id_post == 'Инструктор':
+        elif user.is_worker and not user.id_post == 'Учебная часть':
             user = request.user
             schedule = Schedule.objects.filter(id_worker=user.id)
 
@@ -128,7 +124,6 @@ class ControlView(View, FormMixin):
         else:
             return redirect('/schedule/')
 
-
     def usersByGroupPage(request):
         form = WorkerGetUsersByGroupForm()
         users = User.objects.filter(is_cursant=True)
@@ -138,9 +133,9 @@ class ControlView(View, FormMixin):
             if form.is_valid():
                 group = form.cleaned_data['type_class']
                 users = User.objects.filter(schedule__id_discipline__type_class=group, is_cursant=True).order_by('schedule__id_discipline')
-        
+
         return render(request, 'worker/groups.html', {'users': users, 'form': form})
-    
+
     def usersSchedulesPage(request):
         schedules = Schedule.objects.all()
         return render(request, 'worker/schedules.html', {'schedules': schedules})
@@ -251,19 +246,21 @@ class ControlView(View, FormMixin):
 
     # Добавление обучения
     def trainingsControlPostPage(request):
+        trainings = Training.objects.all()
+        
         if request.method == 'POST':
-            form = WorkerPostTrainingForm(request.POST)
+            form = WorkerPostTrainingForm(request.POST, initial={'duration': 3, 'price_per_month': 15000})
 
             if form.is_valid():
                 form.save()
                 return redirect('/control/trainings/')
             else:
                 message = 'Ошибка заполнения данных'
-
+                return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form, 'message': message})
+            
         else:
-            form = WorkerPostTrainingForm()
+            form = WorkerPostTrainingForm(initial={'duration': 3, 'price_per_month': 15000})
 
-        trainings = Training.objects.all()
         return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form, 'message': message})
 
     # Удаление обучения

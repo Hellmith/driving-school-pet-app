@@ -49,7 +49,7 @@ class ProfileView(View):
             return redirect('/login/')
 
 
-@login_required()
+@login_required(login_url='/login/')
 class ScheduleView(View):
 
     # Показ страницы расписания
@@ -117,7 +117,7 @@ class ScheduleView(View):
         return redirect('/schedule/')
 
 
-@login_required()
+@login_required(login_url='/login/')
 class ControlView(View, FormMixin):
 
     def showPage(request):
@@ -250,21 +250,19 @@ class ControlView(View, FormMixin):
 
     # Добавление обучения
     def trainingsControlPostPage(request):
-        trainings = Training.objects.all()
-        
         if request.method == 'POST':
-            form = WorkerPostTrainingForm(request.POST, initial={'duration': 3, 'price_per_month': 15000})
+            form = WorkerPostTrainingForm(request.POST)
 
             if form.is_valid():
                 form.save()
                 return redirect('/control/trainings/')
             else:
                 message = 'Ошибка заполнения данных'
-                return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form, 'message': message})
-            
-        else:
-            form = WorkerPostTrainingForm(initial={'duration': 3, 'price_per_month': 15000})
 
+        else:
+            form = WorkerPostTrainingForm()
+
+        trainings = Training.objects.all()
         return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form, 'message': message})
 
     # Удаление обучения
@@ -639,6 +637,13 @@ class ControlView(View, FormMixin):
                 form.save()
                 return redirect('/control/streets/')
 
+@login_required(login_url='/login/')
+class CursantsView(View):
+    
+    def showPage(request, id):
+        courses = Course.objects.all()
+        trainings = Training.objects.filter(id_course=id)
+        return render(request, 'worker/cursants.html', {'courses': courses, 'trainings': trainings})
 
 class RedirectProfile(View):
 

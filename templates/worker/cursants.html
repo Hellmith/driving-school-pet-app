@@ -1,0 +1,47 @@
+{% extends '../base.html' %} {% load static %} {% block title %} Расписания {% endblock title %} {% block content %}
+{% block header %}
+{% include './includes/header-2.html' %} {% endblock header %}
+
+<main>
+	<section class="text-gray-600 grid grid-cols-4 gap-4 body-font">
+			<div class='col-span-1 p-4'>
+				<div class='bg-gray-100 p-4 rounded-md'>
+					<div class='text-sm mb-4 font-medium'>Выберите категорию:</div>
+					<ul>
+						{% for item in courses %}
+							<li>
+								<a class='px-4 py-2 rounded-md text-sm font-medium w-full text-center border hover:bg-gray-200' href="{% url 'cursants-by-course' item.id %}">{{item.id_category}}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="pr-4 pt-4 w-full col-span-3">
+				<table class="table-auto w-full">
+					<thead class="text-gray-900 w-full font-medium text-sm bg-gray-100">
+						<tr class="w-full">
+							<th class="w-auto px-4 py-2">#</th>
+							<th class="w-auto px-4 py-2">ФИО</th>
+							<th class="w-auto px-4 py-2">Категория</th>
+						</tr>
+					</thead>
+					<tbody class="text-gray-700 text-sm overflow-y-auto">
+						{% for item in trainings %}
+						<tr>
+							<td class="px-4 py-2 text-center">{{item.id_cursant.id}}</td>
+							<td class="px-4 py-2 text-center">
+								<a class='hover:underline text-red-500' href="{% url 'update-user' item.id_cursant.id%}">
+									{{item.id_cursant}}
+								</a>
+							</td>
+							<td class="px-4 py-2 text-center">{{item.id_course}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+</main>
+
+{% endblock content %}

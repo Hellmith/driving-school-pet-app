@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views
 
-from .views import HomeView, SignupView, ProfileView, ScheduleView, ControlView, RedirectProfile
+from .views import *
 """
 Этот код содержит список URL-адресов приложения, использующих фреймворк Django. Он описывает маршруты и вызываемые вьюхи, связанные с каждым маршрутом. Маршруты включают маршруты для показа и удаления страниц, создания новых страниц, а также маршруты для управления пользователями, сообщениями, курсами, машинами и т.д. Также включены стандартные маршруты для страницы входа и страницы регистрации пользователя.
 """
@@ -27,6 +27,10 @@ urlpatterns = [
     
     # Рассписания
     path('schedules/', ControlView.usersSchedulesPage, name='schedules'),
+
+    # Курсанты
+    path('cursants/', CursantsView.showPage, name='cursants'),
+    path('cursants/<id>/', CursantsView.showPage, name='cursants-by-course'),
 
     # Пользователи
     path('control/users/', ControlView.usersControlPage, name='control-users'),

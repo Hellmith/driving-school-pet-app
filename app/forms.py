@@ -66,38 +66,42 @@ class WorkerPostPostForm(forms.ModelForm):
 
 
 # Формы обучения
-class WorkerPostTrainingForm(forms.ModelForm):
-    agreement_number = forms.IntegerField(label='Номер договора')
-    date_agreement = forms.DateTimeField(label='Дата договора')
-    certificate = forms.CharField(label='Свидетельство', max_length=255)
-    date_record = forms.DateField(label='Дата зачисления')
-    payment_status = forms.BooleanField(label='Статус оплаты', required=False)
+# class WorkerPostTrainingForm(forms.ModelForm):
+#     agreement_number = forms.IntegerField(label='Номер договора')
+#     date_agreement = forms.DateTimeField(label='Дата договора')
+#     certificate = forms.CharField(label='Свидетельство', max_length=255)
+#     date_record = forms.DateField(label='Дата зачисления')
+#     payment_status = forms.BooleanField(label='Статус оплаты', required=False)
  
+#     class Meta:
+#         model = Training
+#         fields = ['id_cursant', 'id_course', 'agreement_number', 'date_agreement', 'certificate', 'date_record', 'payment_status']
+    
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['price'] = forms.IntegerField(label='Стоимость', initial=0, widget=forms.HiddenInput())
+#         self.fields['duration'] = forms.IntegerField(label='Длительность обучения (в месяцах)', initial=0)
+#         self.fields['price_per_month'] = forms.IntegerField(label='Стоимость в месяц', initial=10000)
+ 
+#     def clean(self):
+#         cleaned_data = super().clean()
+#         duration = cleaned_data.get('duration')
+#         price_per_month = cleaned_data.get('price_per_month')
+#         if duration and price_per_month:
+#             price = duration * price_per_month
+#             cleaned_data['price'] = price
+#         return cleaned_data
+    
+#     def save(self, commit=True):
+#         instance = super().save(commit=False)
+#         if commit:
+#             instance.save()
+#         return instance
+class WorkerPostTrainingForm(forms.ModelForm):
+
     class Meta:
         model = Training
-        fields = ['id_cursant', 'id_course', 'agreement_number', 'date_agreement', 'certificate', 'date_record', 'payment_status']
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['price'] = forms.IntegerField(label='Стоимость', initial=0, widget=forms.HiddenInput())
-        self.fields['duration'] = forms.IntegerField(label='Длительность обучения (в месяцах)', initial=0)
-        self.fields['price_per_month'] = forms.IntegerField(label='Стоимость в месяц', initial=10000)
- 
-    def clean(self):
-        cleaned_data = super().clean()
-        duration = cleaned_data.get('duration')
-        price_per_month = cleaned_data.get('price_per_month')
-        if duration and price_per_month:
-            price = duration * price_per_month
-            cleaned_data['price'] = price
-        return cleaned_data
-    
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        if commit:
-            instance.save()
-        return instance
-
+        fields = '__all__'
 
 # Формы вождения
 class WorkerPostDrivingForm(forms.ModelForm):

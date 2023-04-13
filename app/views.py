@@ -137,7 +137,7 @@ class ControlView(View, FormMixin):
 
     # Отфильтрованные пользователи
     def usersFilteredControlPage(request):
-        users = User.objects.filter(last_name__regex=r'[А-Я]')
+        users = User.objects.filter(last_name__regex=r'[А-Я]{1}').order_by('last_name')
 
         return render(request, 'worker/control-users.html', {'users': users})
 

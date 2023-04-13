@@ -3,88 +3,73 @@
 
 <main>
 	<section class="text-gray-600 flex flex-col body-font">
-		<div class="flex items-center mb-4 justify-between">
-			<div class="flex items-center">
-				<a
-					class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
-				>
-					Пользователи
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-posts' %}"
-				>
-					Должности
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-trainings' %}"
-				>
-					Обучения
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-drivings' %}"
-				>
-					Вождения
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-courses' %}"
-				>
-					Курсы
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-disciplines' %}"
-				>
-					Дисциплины
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-categories' %}"
-				>
-					Категории
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-autos' %}"
-				>
-					Автомобили
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-regions' %}"
-				>
-					Регионы
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
-					href="{% url 'control-cities' %}"
-				>
-					Города
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider py-3"
-					href="{% url 'control-streets' %}"
-				>
-					Улицы
-				</a>
-			</div>
-			<div class="flex items-center">
-				<a
-					class="px-6 w-auto justify-center text-sm font-semibold inline-flex border border-emerald-600 rounded-bl-md text-emerald-600 hover:bg-emerald-600 hover:text-white items-center leading-none tracking-wider py-3"
-				>
-					Группы
-				</a>
-				<a
-					class="px-6 w-auto justify-center text-sm font-semibold inline-flex border bg-orange-600 text-white hover:bg-orange-700 border-orange-600 items-center leading-none tracking-wider py-3"
-				>
-					Расписание
-				</a>
-			</div>
+		<div class="flex items-center mb-4">
+			<a
+				class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
+			>
+				Пользователи
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-posts' %}"
+			>
+				Должности
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-trainings' %}"
+			>
+				Обучения
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-drivings' %}"
+			>
+				Вождения
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-courses' %}"
+			>
+				Курсы
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-disciplines' %}"
+			>
+				Дисциплины
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-categories' %}"
+			>
+				Категории
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-autos' %}"
+			>
+				Автомобили
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-regions' %}"
+			>
+				Регионы
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out py-3"
+				href="{% url 'control-cities' %}"
+			>
+				Города
+			</a>
+			<a
+				class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none hover:text-gray-900 hover:bg-gray-100 tracking-wider py-3"
+				href="{% url 'control-streets' %}"
+			>
+				Улицы
+			</a>
 		</div>
-
 		<div class="{% if form %} grid grid-cols-4 {% endif %}">
 			{% if form %}
 			<div class="col-span-1 w-full px-4">
@@ -98,9 +83,20 @@
 					</button>
 				</form>
 				{% if message %}
-				<div class="w-full mt-2 text-center p-4 bg-red-100 text-red-600"><p>{{message}}</p></div>
+				<div class="w-full mt-2 text-center p-4 bg-red-100 text-red-600">
+					<p>
+						{{message}}
+					</p>
+				</div>
 				{% endif %}
 			</div>
+			{% endif %}
+			{% if not form %}
+				<div class='mb-6 ml-4'>
+					<a class='px-4 rounded-md hover:bg-red-600 py-2.5 text-sm font-medium bg-red-500 text-white' href="{% url 'control-users' %}">
+						Вернуться назад
+					</a>
+				</div>
 			{% endif %}
 			<div class="{% if form %} col-span-3 pr-4 {% else %} px-4 {% endif %} w-full">
 				<table class="table-auto w-full">

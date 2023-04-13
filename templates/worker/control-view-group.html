@@ -1,5 +1,5 @@
-{% extends '../base.html' %} {% load static %} {% block title %} Управление пользователями {% endblock title %} {% block content %} {% block header %}
-{% include './includes/header-2.html' %} {% endblock header %}
+{% extends '../base.html' %} {% load static %} {% block title %} Группы {% endblock title %} {% block content %} {% block header %} {% include
+'./includes/header-2.html' %} {% endblock header %}
 
 <main>
 	<section class="text-gray-600 flex flex-col body-font">
@@ -85,41 +85,21 @@
 			</div>
 		</div>
 
-		<div class="{% if form %} grid grid-cols-4 {% endif %}">
-			{% if form %}
-			<div class="col-span-1 w-full px-4">
-				<form method="POST" action="/control/user/new/" class="w-full items-center p-4 bg-gray-100 grid grid-cols-2 gap-4">
-					{% csrf_token %} {{ form.as_div }}
-					<button
-						class="text-white bg-red-500 col-span-2 border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
-						type="submit"
-					>
-						Добавить
-					</button>
-				</form>
-				{% if message %}
-				<div class="w-full mt-2 text-center p-4 bg-red-100 text-red-600"><p>{{message}}</p></div>
-				{% endif %}
-			</div>
-			{% endif %}
-			<div class="{% if form %} col-span-3 pr-4 {% else %} px-4 {% endif %} w-full">
+		<div class="grid grid-cols-4">
+			<div class="col-span-1 w-full px-4">Выберите группу:</div>
+			<div class="col-span-3 pr-4 px-4 w-full">
 				<table class="table-auto w-full">
 					<thead class="text-gray-900 w-full font-medium text-sm bg-gray-100">
 						<tr class="w-full">
 							<th class="px-4 py-2 w-min">#</th>
-							<th class="w-auto flex items-center justify-center gap-2 px-4 py-2">
+							<th class="w-auto px-4 py-2">
 								Фамилия
-								<a href="{% url 'filtered-control-users' %}" title="Фильтрация">
-									<img class="w-4 h-auto text-white" src="{% static 'icons/filter.svg' %}" />
-								</a>
 							</th>
 							<th class="w-auto px-4 py-2">Имя</th>
 							<th class="w-auto px-4 py-2">Отчество</th>
 							<th class="w-auto px-4 py-2">Дата рождения</th>
 							<th class="w-auto px-4 py-2">Телефон</th>
 							<th class="w-auto px-4 py-2">Почта</th>
-							<th class="w-auto px-4 py-2">Роль</th>
-							<th class="w-auto px-4 py-2"></th>
 						</tr>
 					</thead>
 					<tbody class="text-gray-700 text-sm overflow-y-auto">
@@ -132,23 +112,6 @@
 							<td class="px-4 py-2 text-center">{{item.date_of_birthday}}</td>
 							<td class="px-4 py-2 text-center">{{item.tel}}</td>
 							<td class="px-4 py-2 text-center">{{item.email}}</td>
-							<td class="px-4 py-2 text-center">{% if item.is_cursant %} Курсант {% elif item.is_worker %} Сотрудник {% endif %}</td>
-							<td class="px-2 py-2 flex items-center justify-center gap-2 border-l">
-								<a
-									class="px-2 py-2 rounded-md inline-flex items-center bg-blue-300 hover:bg-blue-400 justify-center ease-in-out transition-all"
-									href='{% url "update-user" item.id %}'
-									title="Редактировать"
-								>
-									<img class="w-4 h-auto text-white" src="{% static 'icons/edit.svg' %}" />
-								</a>
-								<a
-									class="px-2 py-2 rounded-md inline-flex items-center bg-red-300 hover:bg-red-400 justify-center ease-in-out transition-all"
-									href='{% url "remove-user" item.id %}'
-									title="Удалить"
-								>
-									<img class="w-4 h-auto" src="{% static 'icons/trash.svg' %}" />
-								</a>
-							</td>
 						</tr>
 						{% endfor %}
 					</tbody>

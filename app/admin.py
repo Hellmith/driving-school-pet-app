@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 
 admin.site.unregister(Group)
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name_category']
@@ -57,34 +58,21 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    fieldsets = (
-        ('Данные аккаунта', {
-            'fields': ('username', 'password', 'date_joined')
-        }),
-        ('Данные пользователя', {
-            'fields': ('last_name', 'first_name', 'patronymic', 'date_of_birthday', 'email', 'tel')
-        }),
-        ('Данные паспорта', {
-            'fields': ('passport_series', 'passport_number', 'date_references', 'by_whom')
-        }),
-        ('Права', {
-            'fields': ('is_superuser', 'is_cursant', 'is_worker', 'id_post')
-        }),
-        (None, {
-            'fields': ['status']
-        }),
-    )
+    fieldsets = (('Данные аккаунта', {
+        'fields': ('username', 'password', 'date_joined')
+    }), ('Данные пользователя', {
+        'fields': ('last_name', 'first_name', 'patronymic', 'date_of_birthday', 'email', 'tel')
+    }), ('Данные паспорта', {
+        'fields': ('passport_series', 'passport_number', 'date_references', 'by_whom')
+    }), ('Права', {
+        'fields': ('is_superuser', 'is_cursant', 'is_worker', 'id_post')
+    }), (None, {
+        'fields': ['status']
+    }))
     list_display = ('username', 'email', 'last_name', 'first_name', 'patronymic', 'date_of_birthday', 'is_cursant', 'is_worker', 'is_superuser')
     list_filter = ('is_cursant', 'is_worker')
     ordering = ['id']
-    search_fields = [
-        'username',
-        'email',
-        'id_post',
-        'last_name',
-        'first_name',
-        'patronymic',
-    ]
+    search_fields = ['username', 'email', 'id_post', 'last_name', 'first_name', 'patronymic']
 
 
 @admin.register(Training)

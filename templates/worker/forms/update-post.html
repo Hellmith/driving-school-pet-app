@@ -1,143 +1,108 @@
-{% extends '../../base.html' %} {% load static %} {% block title %} Личный кабинет
-{% endblock title %} {% block content %}
+{% extends '../../base.html' %}
 
-<header class="text-gray-600 body-font border-b">
-  <div class="flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a
-      class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
-    >
-      <span class="text-xl">Tailblocks</span>
-    </a>
-    <nav
-      class="md:ml-auto flex flex-wrap items-center text-base justify-center"
-    >
-      <a
-        class="mr-5 cursor-pointer hover:text-gray-900"
-        href="{% url 'profile' %}"
-      >
-        Карточка
-      </a>
-      <a
-        class="mr-5 cursor-pointer hover:text-gray-900"
-        href="{% url 'control' %}"
-      >
-        Управление
-      </a>
-    </nav>
-    <a
-      class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-      href="{% url 'logout' %}"
-    >
-      Выход
-      <svg
-        fill="none"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        class="w-4 h-4 ml-1"
-        viewBox="0 0 24 24"
-      >
-        <path d="M5 12h14M12 5l7 7-7 7"></path>
-      </svg>
-    </a>
-  </div>
-</header>
-<main>
-  <section class="text-gray-600 body-font">
-    <div class="flex mx-auto flex-wrap mb-4">
-      <a
-      class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-      href="{% url 'control-users' %}"
-      >
-        Пользователи
-      </a>
-      <a
+{% load static %}
 
-        class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
-        
-      >
-        Должности
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-trainings' %}"
-      >
-        Обучения
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-drivings' %}"
-      >
-        Вождения
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-courses' %}"
-      >
-        Курсы
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-disciplines' %}"
-      >
-        Дисциплины
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-categories' %}"
-      >
-        Категории
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-autos' %}"
-      >
-        Автомобили
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-regions' %}"
-      >
-        Регионы
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-cities' %}"
-      >
-        Города
-      </a>
-      <a
-        class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
-        href="{% url 'control-streets' %}"
-      >
-        Улицы
-      </a>
-    </div>
-    <div class='mb-4 ml-4'>
-      <a class='bg-red-500 text-white hover:bg-red-600 ease-in-out transition-all px-4 py-2 rounded-md' href='{% url 'control-posts' %}'>
-        Вернуться назад
-      </a>
-    </div>
-      <section class="text-gray-600 body-font">
-        <div class="max-w-md py-12 mx-auto">
-          <form
-            method="POST"
-            action=""
-            class="w-full items-center p-4 bg-gray-100 grid gap-4"
-          >
-            {% csrf_token %} {{ form.as_div }}
-            <button
-            class="text-white bg-red-500  border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
-            type="submit"
-          >
-            Обновить
-          </button>
-          </form>
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
+{% block title %}
+
+	 Обновление должности
+
+{% endblock title %}
+
+{% block content %}
+
+	{% block header %}
+
+		{% include '../includes/header-2.html' %}
+
+	{% endblock header %}
+
+	<main>
+		<section class="text-gray-600 body-font">
+			<div class="flex mx-auto flex-wrap mb-4">
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-users' %}"
+				>
+					Пользователи
+				</a>
+				<a
+					class="w-auto justify-center border-t text-sm px-6 font-medium inline-flex items-center leading-none border-red-500 text-red-500 tracking-wider py-3"
+				>
+					Должности
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-trainings' %}"
+				>
+					Обучения
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-drivings' %}"
+				>
+					Вождения
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-courses' %}"
+				>
+					Курсы
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-disciplines' %}"
+				>
+					Дисциплины
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-categories' %}"
+				>
+					Категории
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-autos' %}"
+				>
+					Автомобили
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-regions' %}"
+				>
+					Регионы
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-cities' %}"
+				>
+					Города
+				</a>
+				<a
+					class="px-6 w-auto justify-center text-sm font-medium inline-flex items-center leading-none border-gray-200 hover:text-gray-900 hover:bg-gray-100 tracking-wider transition-all ease-in-out"
+					href="{% url 'control-streets' %}"
+				>
+					Улицы
+				</a>
+			</div>
+			<div class="mb-4 ml-4">
+				<a class="bg-red-500 text-white hover:bg-red-600 ease-in-out transition-all px-4 py-2 rounded-md" href="{% url 'control-posts' %}">
+					Вернуться назад
+				</a>
+			</div>
+
+			<div class="max-w-md py-12 mx-auto">
+				<form method="POST" action="" class="w-full items-center p-4 bg-gray-100 grid gap-4">
+					{% csrf_token %} {{ form.as_div }}
+					<button
+						class="text-white bg-red-500 border-0 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
+						type="submit"
+					>
+						Обновить
+					</button>
+				</form>
+			</div>
+		</section>
+	</main>
 
 {% endblock content %}

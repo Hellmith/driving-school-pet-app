@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import FormMixin
+from datetime import datetime
 
 from .models import *
 from .forms import *
@@ -12,82 +13,108 @@ from .forms import *
 
 class HomeView(View):
 
+    # Показ главной страницы
     def showPage(request):
-        if request.method == 'GET':
-            return render(request, 'index.html')
+        return render(request, 'index.html')
 
 
-@login_required()
+@login_required(login_url='/login/')
 class ProfileView(View):
 
+    # Показ страницы профиля
     def showPage(request):
-
-        if request.user.is_authenticated:
-            user = request.user
-
-            if request.user.is_cursant:
-                training = Training.objects.get(id_cursant=user.id)
-
-                return render(request, 'cursant/profile.html', {'user': user, 'training': training})
-
-            elif request.user.is_worker:
-                if request.user.id_post == 'Инструктор':
+        # Запрашиваем пользователя
+        user = request.user
+        # Если пользователь авторизован
+        if user.is_authenticated:
+            # Если пользователь является курсантом
+            if user.is_cursant:
+                # Ищем обучение пользователя
+                training = Training.objects.filter(id_cursant=user.id)
+                # Если нашли
+                if training:
+                    return render(request, 'cursant/profile.html', {'user': user, 'training': training})
+                # Иначе
+                else:
+                    message = 'Данные об обучении не предоставлены или не существуют!'
+                    return render(request, 'cursant/profile.html', {'user': user, 'message': message})
+            # Если пользователь является сотрудником
+            elif user.is_worker:
+                # Если его роль инструктор
+                if user.id_post == 'Инструктор':
                     return render(request, 'worker/profile.html', {'user': user})
-
+                # Если его роль учебная часть
                 else:
                     return render(request, 'worker/profile-2.html', {'user': user})
 
+            else:
+                return redirect('/admin/')
         else:
-            return redirect('login')
+            return redirect('/login/')
 
 
 @login_required()
 class ScheduleView(View):
 
+    # Показ страницы расписания
     def showPage(request):
-
-        form = CursantPostScheduleForm(request.POST)
-
-        if request.user is not None and request.user.is_cursant:
-            user = request.user
+        # Запрашиваем пользователя
+        user = request.user
+        # Если пользователь является курсантом
+        if user.is_cursant:
+            # Запрашиваем форму
+            form = CursantPostScheduleForm(request.POST)
+            # Ищем расписание
             schedule = Schedule.objects.filter(id_cursant=user.id)
+            if form.is_valid():
+                form.save()
+                return redirect('/schedule/')
 
-            return render(request, 'cursant/schedule.html', {'schedule': schedule, 'form': form})
+            # Если нашли расписание
+            if schedule:
+                return render(request, 'cursant/schedule.html', {'users': user, 'schedule': schedule, 'form': form})
+            # Иначе
+            else:
+                message = 'Данные о расписании не предоставлены или не существуют!'
+                return render(request, 'cursant/schedule.html', {'user': user, 'form': form, 'message': message})
 
-        elif request.user is not None and request.user.is_worker:
+        # Если инструктор
+        elif user.is_worker and user.id_post == 'Инструктор':
             user = request.user
             schedule = Schedule.objects.filter(id_worker=user.id)
 
-            return render(request, 'worker/schedule.html', {'schedule': schedule})
+            if schedule:
+                return render(request, 'worker/schedule.html', {'schedule': schedule})
+
+            else:
+                message = 'Данные о расписании не предоставлены или не существуют!'
+                return render(request, 'worker/schedule.html', {'schedule': schedule, 'message': message})
 
         else:
-            return redirect('login')
+            return redirect('/control/users/')
 
     def deletePage(request, id):
-        remove = Schedule.objects.filter(
-            id_cursant=request.user.id).filter(id=id).delete()
+        remove = Schedule.objects.filter(id_cursant=request.user.id).filter(id=id).delete()
 
-        return redirect('schedule')
+        return redirect('/schedule/')
 
     def postPage(request):
-        date = request.POST['date_class']
+        date = datetime.strptime(request.POST['date_class'], '%d.%m.%Y').strftime('%Y-%m-%d')
         time = request.POST['time_class']
 
         if Schedule.objects.filter(date_class=date) and Schedule.objects.filter(time_class=time):
-            message = 'На данное время инструктор занят! Выберите другой день или время.'
-            return render(request, 'cursant/schedule.html', {'message': message})
+            msg = 'На данное время инструктор занят! Выберите другой день или время.'
+            return render(request, 'cursant/schedule.html', {'msg': msg})
 
         else:
-            schedule_new = Schedule(id_worker=User.objects.get(id=request.POST['id_worker']),
-                                    id_discipline=Discipline.objects.get(
-                                        id=request.POST['id_discipline']),
+            form = Schedule(id_worker=User.objects.get(id=request.POST['id_worker']),
+                                    id_discipline=Discipline.objects.get(id=request.POST['id_discipline']),
                                     id_cursant=request.user,
                                     date_class=date,
                                     time_class=time)
+            form.save()
 
-            schedule_new.save()
-
-        return redirect('schedule')
+        return redirect('/schedule/')
 
 
 @login_required()
@@ -95,13 +122,17 @@ class ControlView(View, FormMixin):
 
     def showPage(request):
 
-        return redirect('/control/users/')
+        if request.user.is_worker and request.user.id_post == 'Учебная часть':
+            return redirect('/control/users/')
+
+        else:
+            return redirect('/schedule/')
 
     # Пользователи
     def usersControlPage(request):
         users = User.objects.all()
         form = WorkerPostUserForm(request.POST)
-
+        
         return render(request, 'worker/control-users.html', {'users': users, 'form': form})
 
     # Отфильтрованные пользователи
@@ -112,13 +143,21 @@ class ControlView(View, FormMixin):
 
     # Добавление пользователя
     def usersControlPostPage(request):
-        form = WorkerPostUserForm(request.POST)
+        if request.method == 'POST':
+            form = WorkerPostUserForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/users/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostUserForm()
 
-        if form.is_valid():
-            form.save()
-
-            return redirect('/control/users/')
-
+        users = User.objects.all()
+        return render(request, 'worker/control-users.html', {'users': users, 'form': form, 'message': message})
+            
     # Удаление пользователя
     def usersControlDeletePage(request, id):
         remove = User.objects.filter(id=id).delete()
@@ -151,10 +190,20 @@ class ControlView(View, FormMixin):
 
     # Добавление должностни
     def postsControlPostPage(request):
-        post_new = WorkerPostPostForm(request.POST)
-        post_new.save()
+        if request.method == 'POST':
+            form = WorkerPostPostForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/posts/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostPostForm()
 
-        return redirect('/control/posts/')
+        posts = Post.objects.all()
+        return render(request, 'worker/control-posts.html', {'posts': posts, 'form': form, 'message': message})
 
     # Удаление должности
     def postsControlDeletePage(request, id):
@@ -175,8 +224,8 @@ class ControlView(View, FormMixin):
             if form.is_valid():
                 form.save()
                 return redirect('/control/posts/')
-    # Обучения
 
+    # Обучения
     def trainingsControlPage(request):
         trainings = Training.objects.all()
         form = WorkerPostTrainingForm(request.POST)
@@ -185,10 +234,20 @@ class ControlView(View, FormMixin):
 
     # Добавление обучения
     def trainingsControlPostPage(request):
-        training_new = WorkerPostTrainingForm(request.POST)
-        training_new.save()
+        if request.method == 'POST':
+            form = WorkerPostTrainingForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/trainings/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostTrainingForm()
 
-        return redirect('/control/trainings/')
+        trainings = Training.objects.all()
+        return render(request, 'worker/control-trainings.html', {'trainings': trainings, 'form': form, 'message': message})
 
     # Удаление обучения
     def trainingsControlDeletePage(request, id):
@@ -219,10 +278,20 @@ class ControlView(View, FormMixin):
 
     # Добавление вождения
     def drivingsControlPostPage(request):
-        driving_new = WorkerPostDrivingForm(request.POST)
-        driving_new.save()
+        if request.method == 'POST':
+            form = WorkerPostDrivingForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/drivings/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostDrivingForm()
 
-        return redirect('/control/drivings/')
+        drivings = Driving.objects.all()
+        return render(request, 'worker/control-driving.html', {'drivings': drivings, 'form': form, 'message': message})
 
     # Удаление вождения
     def drivingsControlDeletePage(request, id):
@@ -253,10 +322,20 @@ class ControlView(View, FormMixin):
 
     # Добавление курса
     def coursesControlPostPage(request):
-        course_new = WorkerPostCourseForm(request.POST)
-        course_new.save()
+        if request.method == 'POST':
+            form = WorkerPostCourseForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/courses/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostCourseForm()
 
-        return redirect('/control/courses/')
+        courses = Course.objects.all()
+        return render(request, 'worker/control-courses.html', {'courses': courses, 'form': form, 'message': message})
 
     # Удаление курса
     def coursesControlDeletePage(request, id):
@@ -287,10 +366,20 @@ class ControlView(View, FormMixin):
 
     # Добавление дисциплины
     def discliplinesControlPostPage(request):
-        discipline_new = WorkerPostDisciplineForm(request.POST)
-        discipline_new.save()
+        if request.method == 'POST':
+            form = WorkerPostDisciplineForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/disciplines/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostDisciplineForm()
 
-        return redirect('/control/disciplines/')
+        disciplines = Discipline.objects.all()
+        return render(request, 'worker/control-disciplines.html', {'disciplines': disciplines, 'form': form, 'message': message})
 
     # Удаление дисциплины
     def discliplinesControlDeletePage(request, id):
@@ -321,17 +410,27 @@ class ControlView(View, FormMixin):
 
     # Добавление категории
     def categoriesControlPostPage(request):
-        category_new = WorkerPostCategoryForm(request.POST)
-        category_new.save()
+        if request.method == 'POST':
+            form = WorkerPostCategoryForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/categories/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostCategoryForm()
 
-        return redirect('/control/categories/')
+        categories = Category.objects.all()
+        return render(request, 'worker/control-categories.html', {'categories': categories, 'form': form, 'message': message})
 
     # Удаление категории
     def categoriesControlDeletePage(request, id):
         remove = Category.objects.filter(id=id).delete()
 
         return redirect('/control/categories/')
-    
+
     # Обновление категории
     def categoriesControlUpdatePage(request, id):
         category = Category.objects.get(id=id)
@@ -355,17 +454,27 @@ class ControlView(View, FormMixin):
 
     # Добавление автомобиля
     def autosControlPostPage(request):
-        car_new = WorkerPostCarForm(request.POST)
-        car_new.save()
+        if request.method == 'POST':
+            form = WorkerPostCarForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/cars/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostCarForm()
 
-        return redirect('/control/cars/')
+        autos = Car.objects.all()
+        return render(request, 'worker/control-autos.html', {'autos': autos, 'form': form, 'message': message})
 
     # Удаление автомобиля
     def autosControlDeletePage(request, id):
         remove = Car.objects.filter(id=id).delete()
 
         return redirect('/control/cars/')
-    
+
     # Обновление автомобиля
     def autosControlUpdatePage(request, id):
         auto = Car.objects.get(id=id)
@@ -379,7 +488,7 @@ class ControlView(View, FormMixin):
             if form.is_valid():
                 form.save()
                 return redirect('/control/cars/')
-    
+
     # Регионы
     def regionsControlPage(request):
         regions = Region.objects.all()
@@ -389,17 +498,27 @@ class ControlView(View, FormMixin):
 
     # Добавление региона
     def regionsControlPostPage(request):
-        region_new = WorkerPostRegionForm(request.POST)
-        region_new.save()
+        if request.method == 'POST':
+            form = WorkerPostRegionForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/regions/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostRegionForm()
 
-        return redirect('/control/regions/')
+        regions = Region.objects.all()
+        return render(request, 'worker/control-regions.html', {'regions': regions, 'form': form, 'message': message})
 
     # Удаление региона
     def regionsControlDeletePage(request, id):
         remove = Region.objects.filter(id=id).delete()
 
         return redirect('/control/regions/')
-    
+
     # Обновление региона
     def regionsControlUpdatePage(request, id):
         region = Region.objects.get(id=id)
@@ -423,10 +542,20 @@ class ControlView(View, FormMixin):
 
     # Добавление города
     def citiesControlPostPage(request):
-        city_new = WorkerPostCityForm(request.POST)
-        city_new.save()
+        if request.method == 'POST':
+            form = WorkerPostCityForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/cities/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostCityForm()
 
-        return redirect('/control/cities/')
+        cities = City.objects.all()
+        return render(request, 'worker/control-cities.html', {'cities': cities, 'form': form, 'message': message})
 
     # Удаление города
     def citiesControlDeletePage(request, id):
@@ -457,17 +586,27 @@ class ControlView(View, FormMixin):
 
     # Добавление улицы
     def streetsControlPostPage(request):
-        city_new = WorkerPostStreetForm(request.POST)
-        city_new.save()
+        if request.method == 'POST':
+            form = WorkerPostStreetForm(request.POST)
+            
+            if form.is_valid():
+                form.save()
+                return redirect('/control/streets/')
+            else:
+                message = 'Ошибка заполнения данных'
+        
+        else:
+            form = WorkerPostStreetForm()
 
-        return redirect('/control/streets/')
+        streets = Street.objects.all()
+        return render(request, 'worker/control-streets.html', {'streets': streets, 'form': form, 'message': message})
 
     # Удаление улицы
     def streetsControlDeletePage(request, id):
         remove = Street.objects.filter(id=id).delete()
 
         return redirect('/control/streets/')
-    
+
     # Обновление улицы
     def streetsControlUpdatePage(request, id):
         street = Street.objects.get(id=id)

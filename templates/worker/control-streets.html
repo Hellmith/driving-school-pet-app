@@ -90,11 +90,11 @@
 					<form
 						method="POST"
 						action="/control/street/new/"
-						class="w-full items-center p-4 bg-gray-100 grid grid-cols-2 items-center justify-center gap-4"
+						class="w-full items-center p-4 bg-gray-100 grid items-center justify-center gap-4"
 					>
 						{% csrf_token %} {{ form.as_div }}
 						<button
-							class="text-white bg-red-500 border-0 col-span-2 font-medium py-3 px-5 ease-in-out transition-all focus:outline-none hover:bg-red-600 rounded-md"
+						class='px-4 rounded-md hover:bg-red-600 py-2.5 text-sm font-medium bg-red-500 text-white'
 							type="submit"
 						>
 							Добавить
